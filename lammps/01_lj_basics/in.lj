@@ -32,7 +32,8 @@ unfix           nvtfix
 reset_timestep  0
 fix             nvefix all nve
 
-dump            traj all custom 100 trajectory.lammpstrj id type x y z
+dump            traj all custom 100 trajectory.lammpstrj id type xu yu zu
+dump_modify     traj sort id
 
 run             20000
 

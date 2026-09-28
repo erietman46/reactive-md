@@ -1,0 +1,17 @@
+# LAMMPS generated files
+*.lammpstrj
+log.lammps
+
+# Large/raw simulation output
+results/raw/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editors
+.vscode/
+
+# OS
+.DS_Store
+

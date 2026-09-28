@@ -1,0 +1,39 @@
+units           lj
+dimension       3
+boundary        p p p
+atom_style      atomic
+
+lattice         fcc 0.8
+region          box block 0 8 0 8 0 8
+create_box      1 box
+create_atoms    1 box
+
+mass            1 1.0
+
+pair_style      lj/cut 2.5
+pair_coeff      1 1 1.0 1.0 2.5
+
+neighbor        0.3 bin
+neigh_modify    delay 0 every 1 check yes
+
+velocity        all create 1.0 12345 mom yes rot no dist gaussian
+
+timestep        0.005
+
+thermo          100
+thermo_style    custom step temp pe ke etotal press density
+
+# Equilibration
+fix             nvtfix all nvt temp 1.0 1.0 1.0
+run             20000
+unfix           nvtfix
+
+# Production
+reset_timestep  0
+fix             nvefix all nve
+
+dump            traj all custom 100 trajectory.lammpstrj id type x y z
+
+run             20000
+
+write_data      final.data

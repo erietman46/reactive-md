@@ -1,0 +1,126 @@
+{
+  "track": "generic",
+  "state": "E1K3",
+  "T_K": 300.0,
+  "rho0": 0.002,
+  "design": {
+    "state": "E1K3",
+    "regime_eq": "E1 monomer-rich",
+    "regime_kin": "K3 slow",
+    "label": "A",
+    "eb": 6.315315868640482,
+    "k_bond": 129.77667986715355,
+    "barrier_param": "Eh",
+    "barrier_value": 13.486854608279412,
+    "U_bond": -6.315315868640482,
+    "U_barrier": 13.486854608279424,
+    "r_barrier": 2.5999999999999996,
+    "fd_pred": 0.2000000000008231,
+    "log_KV": 4.358310108062739,
+    "dH": -7.546079158908487,
+    "dS": -77.31185275483963,
+    "dF_diss": 17.9119701199957,
+    "tau_d_ps": 312.1689431799267,
+    "tau_relax_ps": 208.11262878626096,
+    "B2_frozen": -103.95594485837906,
+    "fd_at_1bar": 0.003744184385664997
+  },
+  "pair": {
+    "name": "A: piecewise Morse | quintic barrier | Mie 12-6",
+    "family": "piecewise",
+    "class_name": "PiecewisePotential",
+    "params": {
+      "formB": "morse",
+      "rb": 1.78,
+      "eb": 6.315315868640482,
+      "n": 12.0,
+      "m": 6.0,
+      "xb": 2.0,
+      "pk": 4.0,
+      "g2": 3.902767,
+      "rcb": 2.8,
+      "bb": 3.205374146379087,
+      "rh": 2.6,
+      "Eh": 13.486854608279412,
+      "kh": null,
+      "formF": "mie",
+      "rf": 4.183416054049033,
+      "ef": 1.9759878019298545,
+      "nf": 12.0,
+      "mf": 6.0,
+      "xf": 2.0,
+      "bf": 1.5,
+      "rin": 8.0,
+      "rout": 10.0
+    },
+    "kh": 79.24515962305571,
+    "landscape": {
+      "name": "A: piecewise Morse | quintic barrier | Mie 12-6",
+      "family": "piecewise",
+      "clean": true,
+      "r_bond": 1.7799999999999998,
+      "u_bond": -6.315315868640482,
+      "r_barrier": 2.5999999999999996,
+      "u_barrier": 13.486854608279424,
+      "r_disp": 4.183416054049024,
+      "u_disp": -1.975987801929851,
+      "k_bond": 129.77667986715355,
+      "rcut": 10.0
+    },
+    "units": {
+      "energy": "kJ/mol",
+      "distance": "Angstrom"
+    }
+  },
+  "manybody": {
+    "kind": "coord_hermite_cubic",
+    "lam_kJmol": 6.2796977384536525,
+    "lam_min_kJmol": 3.1398488692268263,
+    "lam_factor": 2.0,
+    "strength_reference": "dimer + monomer van der Waals complex",
+    "hinge": "cubic",
+    "delta": 0.05,
+    "counter": {
+      "kind": "hermite",
+      "r1": 2.2399999999999998,
+      "W": 1.12
+    },
+    "reach_A": 2.8
+  },
+  "lammps": {
+    "pair_only": [
+      "units real",
+      "pair_style table spline 3000",
+      "pair_coeff 1 1 pair.table REACTIVE 10"
+    ],
+    "with_penalty": [
+      "units metal",
+      "pair_style eam/fs",
+      "pair_coeff * * manybody.eam.fs NO2"
+    ],
+    "note": "eam/fs carries both the pair term and the coordination penalty; use it alone"
+  },
+  "verification": [
+    {
+      "config": 0,
+      "python_pair": -6.315315868640482,
+      "python_total": -6.315315868640482,
+      "lammps_table": -6.315320300499847,
+      "lammps_eam": -6.315315868642302
+    },
+    {
+      "config": 1,
+      "python_pair": -11.756072878210961,
+      "python_total": -5.9324218523791785,
+      "lammps_table": -11.756074570545652,
+      "lammps_eam": -5.932421825283448
+    },
+    {
+      "config": 2,
+      "python_pair": -18.945947406885292,
+      "python_total": -1.456174283218754,
+      "lammps_table": -18.945960892629405,
+      "lammps_eam": -1.4561742835676992
+    }
+  ]
+}

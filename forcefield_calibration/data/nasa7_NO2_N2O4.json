@@ -1,0 +1,15 @@
+{
+  "_source": "Cantera data/nasa_gas.yaml (https://github.com/Cantera/cantera/blob/main/data/nasa_gas.yaml), retrieved 2026-10-13. NASA-7 polynomials; NO2 note 'L 7/88' (Burcat/NASA Glenn), N2O4 note 'TPIS89' (Gurvich et al., Thermodynamic Properties of Individual Substances, 1989).",
+  "_format": "cp/R = a0 + a1 T + a2 T^2 + a3 T^3 + a4 T^4; H/RT = a0 + a1 T/2 + a2 T^2/3 + a3 T^3/4 + a4 T^4/5 + a5/T; S/R = a0 ln T + a1 T + a2 T^2/2 + a3 T^3/3 + a4 T^4/4 + a6",
+  "_reference_state": "H includes the enthalpy of formation (elements in their reference states at 298.15 K); S is absolute; p0 = 1 bar",
+  "NO2": {
+    "T_ranges": [200.0, 1000.0, 6000.0],
+    "low":  [3.94403907, -1.58547444e-03, 1.66578984e-05, -2.04754478e-08, 7.83503265e-12, 2896.59865, 6.31196225],
+    "high": [4.88474429, 2.17241639e-03, -8.2807902e-07, 1.57477293e-10, -1.05110549e-14, 2316.48462, -0.117357075]
+  },
+  "N2O4": {
+    "T_ranges": [200.0, 1000.0, 6000.0],
+    "low":  [3.02002308, 0.0295904321, -3.01342458e-05, 1.42360407e-08, -2.44100049e-12, -640.040162, 11.8059606],
+    "high": [11.5752899, 4.01616086e-03, -1.57178323e-06, 2.68274309e-10, -1.66922019e-14, -2921.91226, -31.9488439]
+  }
+}

@@ -1,0 +1,14 @@
+# Reference calibration data for 2 NO2 -> N2O4 (association), p0 = 1 bar.
+# source: NASA-7 polynomials (Cantera nasa_gas.yaml: NO2 L7/88, N2O4 TPIS89)
+# uncertainty = max(|NASA-7 - JANAF anchor|) floored: spread lnK = 0.0420, spread dH = 0.1648 kJ/mol
+# dH values come from the same thermochemical evaluation as ln K: they are NOT independent data.
+T_K,lnKp_assoc,Kp_assoc,deltaH_kJmol,deltaS_JmolK,sigma_lnK,sigma_dH_kJmol,role,source
+298.15,1.949647,7.02621,-57.2748,-175.890,0.0500,0.2000,fit,NASA7
+325,0.043197,1.04414,-57.1236,-175.406,0.0500,0.2000,fit,NASA7
+350,-1.464579,0.231175,-56.9476,-174.884,0.0500,0.2000,fit,NASA7
+375,-2.766950,0.0628534,-56.7427,-174.320,0.0500,0.2000,fit,NASA7
+400,-3.902171,0.020198,-56.5138,-173.729,0.0500,0.2000,fit,NASA7
+425,-4.899606,0.00744952,-56.2647,-173.125,0.0500,0.2000,test,NASA7
+450,-5.782165,0.00308204,-55.9992,-172.518,0.0500,0.2000,test,NASA7
+475,-6.567990,0.00140462,-55.7202,-171.915,0.0500,0.2000,test,NASA7
+500,-7.271628,0.00069498,-55.4304,-171.320,0.0500,0.2000,test,NASA7

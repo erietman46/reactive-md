@@ -1,0 +1,12 @@
+# Association 2 NO2(g) -> N2O4(g), standard state p0 = 1 bar.
+# Values computed from the NIST-JANAF tables for NO2(g) and N2O4(g) (janaf.nist.gov)
+# as quoted in the project calibration notes (Delta_f G(NO2, 298.15 K) = 51.258 kJ/mol,
+# Delta_f G(N2O4, 298.15 K) = 97.787 kJ/mol -> Delta_r G = -4.729 kJ/mol).
+# janaf.nist.gov is not reachable from the build container; replace or extend this file by
+# placing the raw JANAF text tables in data/janaf/ (see reference_data.py).
+T_K,Kp_assoc,deltaH_kJmol
+298.15,6.737,-57.11
+300,5.845,-57.11
+350,0.2234,-56.86
+400,0.0196,-56.50
+450,0.0030,-56.05

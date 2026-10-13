@@ -1,0 +1,6 @@
+# Experimental second virial coefficients of the equilibrium NO2/N2O4 gas.
+# INTENTIONALLY EMPTY: no verified dataset has been entered yet. Do not fill with assumed values.
+# Convention to use when filling: apparent B per NO2 formula unit, p/(rho0 R T) = 1 + B_app rho0 + ...
+# (rho0 = moles of NO2 units per volume). This equals the model's full B2 (see virial_coefficients.py).
+# Candidate source to check: Dymond, Marsh, Wilhoit, Wong, "Virial Coefficients of Pure Gases" (Landolt-Bornstein IV/21A, 2002).
+T_K,B2_cm3mol,sigma_B2_cm3mol,convention,source

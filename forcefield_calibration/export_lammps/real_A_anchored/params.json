@@ -1,0 +1,103 @@
+{
+  "track": "real",
+  "T_K": 298.15,
+  "calibration": "K_p(298.15 K) exact, k_b = 580 kJ/mol/A^2",
+  "pair": {
+    "name": "A: piecewise Morse | quintic barrier | Mie 12-6",
+    "family": "piecewise",
+    "class_name": "PiecewisePotential",
+    "params": {
+      "formB": "morse",
+      "rb": 1.78,
+      "eb": 28.225428152412647,
+      "n": 12.0,
+      "m": 6.0,
+      "xb": 2.0,
+      "pk": 4.0,
+      "g2": 3.902767,
+      "rcb": 2.8,
+      "bb": 3.205374146379087,
+      "rh": 2.6,
+      "Eh": 5.0,
+      "kh": null,
+      "formF": "mie",
+      "rf": 4.183416054049033,
+      "ef": 1.9759878019298545,
+      "nf": 12.0,
+      "mf": 6.0,
+      "xf": 2.0,
+      "bf": 1.5,
+      "rin": 8.0,
+      "rout": 10.0
+    },
+    "kh": 39.71691173621411,
+    "landscape": {
+      "name": "A: piecewise Morse | quintic barrier | Mie 12-6",
+      "family": "piecewise",
+      "clean": true,
+      "r_bond": 1.7799999999999998,
+      "u_bond": -28.225428152412647,
+      "r_barrier": 2.599999999999998,
+      "u_barrier": 5.0,
+      "r_disp": 4.183416054049033,
+      "u_disp": -1.9759878019298545,
+      "k_bond": 580.0067048789101,
+      "rcut": 10.0
+    },
+    "units": {
+      "energy": "kJ/mol",
+      "distance": "Angstrom"
+    }
+  },
+  "manybody": {
+    "kind": "coord_hermite_cubic",
+    "lam_kJmol": 54.61129208765279,
+    "lam_min_kJmol": 27.305646043826396,
+    "lam_factor": 2.0,
+    "strength_reference": "dimer + monomer van der Waals complex",
+    "hinge": "cubic",
+    "delta": 0.05,
+    "counter": {
+      "kind": "hermite",
+      "r1": 2.239999999999999,
+      "W": 1.1199999999999983
+    },
+    "reach_A": 2.799999999999998
+  },
+  "lammps": {
+    "pair_only": [
+      "units real",
+      "pair_style table spline 3000",
+      "pair_coeff 1 1 pair.table REACTIVE 10"
+    ],
+    "with_penalty": [
+      "units metal",
+      "pair_style eam/fs",
+      "pair_coeff * * manybody.eam.fs NO2"
+    ],
+    "note": "eam/fs carries both the pair term and the coordination penalty; use it alone"
+  },
+  "verification": [
+    {
+      "config": 0,
+      "python_pair": -28.225428152412647,
+      "python_total": -28.225428152412647,
+      "lammps_table": -28.225435548291877,
+      "lammps_eam": -28.2254281524144
+    },
+    {
+      "config": 1,
+      "python_pair": -57.05669204661097,
+      "python_total": -6.411402984247033,
+      "lammps_table": -57.05669511569637,
+      "lammps_eam": -6.411402942033486
+    },
+    {
+      "config": 2,
+      "python_pair": -84.67628356767347,
+      "python_total": 67.42325185336279,
+      "lammps_table": -84.67630608089279,
+      "lammps_eam": 67.42325185257508
+    }
+  ]
+}

@@ -1,0 +1,868 @@
+{
+  "track": "generic_C",
+  "T": 300.0,
+  "rho0": 0.002,
+  "pair": {
+    "name": "C: additive Morse + Gaussian barrier + Gaussian dispersion",
+    "family": "additive",
+    "clean": true,
+    "r_bond": 1.779980676050548,
+    "u_bond": -10.872218523564804,
+    "r_barrier": 2.6229162485092328,
+    "u_barrier": 6.690867511788807,
+    "r_disp": 4.183416054049033,
+    "u_disp": -3.204389181780652,
+    "k_bond": 224.99176531459153,
+    "rcut": 10.0
+  },
+  "base": {
+    "log_K3_pair_only": 14.090590519021148,
+    "fractions_pair_only": {
+      "monomer": 0.31395163995807485,
+      "dimer": 0.19713126446472012,
+      "trimer": 0.48891709557720514
+    },
+    "E_vdw": -6.408148676109381,
+    "vdw_geom": [
+      4.174755713392176,
+      4.184129463957986,
+      78.0
+    ]
+  },
+  "rows": [
+    {
+      "track": "generic_C",
+      "penalty": "coord_hermite_tanh_sq",
+      "description": "explorer coordination form: Hermite counter, tanh-squared hinge",
+      "n_params": 4,
+      "lam": 6.872371801552042,
+      "lam_min": 5.975975479610471,
+      "lam_over_eb": 0.6321039065446152,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.004147350310654823,
+      "dlnK_pair": -0.0004934575130803864,
+      "worst_trimer_dE": -5.582331718593609,
+      "worst_trimer_geom": [
+        1.8349855070379093,
+        1.8349855070379093,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.8258169575157712,
+      "n_traps": 5,
+      "worst_trap_barrier": 8.169119570022094,
+      "worst_trap_lifetime_ps": 2.644492224960209,
+      "worst_trap_dE": -5.578903218401725,
+      "traps": [
+        {
+          "r12": 1.8379835746429647,
+          "r13": 1.8379835746429647,
+          "r23": 3.6759671492859294,
+          "theta_deg": 180.0,
+          "dE": -5.578903218401725,
+          "barrier": 8.169119570022094,
+          "lifetime_s": 2.644492224960209e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 1.8129835746429648,
+          "r23": 2.2323682846117467,
+          "theta_deg": 76.0,
+          "dE": -4.031555924129421,
+          "barrier": 6.62177227574979,
+          "lifetime_s": 1.4221010550021964e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 2.2379835746429633,
+          "r23": 1.8164460819913983,
+          "theta_deg": 52.0,
+          "dE": -4.027792437652433,
+          "barrier": 6.618008789272802,
+          "lifetime_s": 1.4199569908005605e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 2.1879835746429634,
+          "r23": 2.143907478272071,
+          "theta_deg": 64.0,
+          "dE": -3.9603794989698313,
+          "barrier": 6.5505958505902,
+          "lifetime_s": 1.3820946444260698e-12
+        },
+        {
+          "r12": 2.1629835746429635,
+          "r13": 2.1879835746429634,
+          "r23": 1.7698451370306616,
+          "theta_deg": 48.00000000000001,
+          "dE": -3.9080529685156478,
+          "barrier": 6.498269320136017,
+          "lifetime_s": 1.3534029030733958e-12
+        }
+      ],
+      "log_K3": 11.197206485300242,
+      "log_K3_suppression": -2.8933840337209062,
+      "trimer_fraction": 0.09044865926978615,
+      "dimer_fraction": 0.4402570190252048,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 902086.3069729673,
+      "eam_compatible": true,
+      "exact_pair_invariance": false,
+      "lammps_eam_max_abs_err": 2.9416007407689904e-09,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "coord_hermite_cubic",
+      "description": "Hermite counter, exact cubic hinge (zero for n <= 1)",
+      "n_params": 4,
+      "lam": 7.232146226194319,
+      "lam_min": 6.288822805386364,
+      "lam_over_eb": 0.6651950759193376,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -5.582331718593608,
+      "worst_trimer_geom": [
+        1.8349855070379093,
+        1.8349855070379093,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.825816957515773,
+      "n_traps": 5,
+      "worst_trap_barrier": 8.173783210246391,
+      "worst_trap_lifetime_ps": 2.6494412306768305,
+      "worst_trap_dE": -5.579761902852644,
+      "traps": [
+        {
+          "r12": 1.8379835746429647,
+          "r13": 1.8379835746429647,
+          "r23": 3.6759671492859294,
+          "theta_deg": 180.0,
+          "dE": -5.579761902852644,
+          "barrier": 8.173783210246391,
+          "lifetime_s": 2.6494412306768307e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 1.8129835746429648,
+          "r23": 2.2323682846117467,
+          "theta_deg": 76.0,
+          "dE": -4.173710612114705,
+          "barrier": 6.767731919508453,
+          "lifetime_s": 1.5078001906626255e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 2.2379835746429633,
+          "r23": 1.8164460819913983,
+          "theta_deg": 52.0,
+          "dE": -4.170485758778611,
+          "barrier": 6.764507066172358,
+          "lifetime_s": 1.5058520621196276e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 2.1879835746429634,
+          "r23": 2.143907478272071,
+          "theta_deg": 64.0,
+          "dE": -4.153852394076255,
+          "barrier": 6.747873701470002,
+          "lifetime_s": 1.4958437751816114e-12
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 2.1129835746429637,
+          "r23": 2.197970079537948,
+          "theta_deg": 68.0,
+          "dE": -4.099425425104132,
+          "barrier": 6.69344673249788,
+          "lifetime_s": 1.4635576915374814e-12
+        }
+      ],
+      "log_K3": 11.221411556054361,
+      "log_K3_suppression": -2.869178962966787,
+      "trimer_fraction": 0.09224958392234783,
+      "dimer_fraction": 0.43915789730304344,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 900789.0767679837,
+      "eam_compatible": true,
+      "exact_pair_invariance": true,
+      "lammps_eam_max_abs_err": 6.93459512035588e-10,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "coord_quintic_cubic",
+      "description": "quintic counter falling from r_b, exact cubic hinge",
+      "n_params": 5,
+      "lam": 7.3776384257266185,
+      "lam_min": 6.415337761501408,
+      "lam_over_eb": 0.6785770916704886,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -5.5857032916470954,
+      "worst_trimer_geom": [
+        1.8599855070379092,
+        1.8599855070379092,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.8224453844622852,
+      "n_traps": 5,
+      "worst_trap_barrier": 8.302918035495757,
+      "worst_trap_lifetime_ps": 2.7902185513614106,
+      "worst_trap_dE": -5.589142017587447,
+      "traps": [
+        {
+          "r12": 1.8379835746429647,
+          "r13": 1.8379835746429647,
+          "r23": 3.6759671492859294,
+          "theta_deg": 180.0,
+          "dE": -5.589142017587447,
+          "barrier": 8.302918035495757,
+          "lifetime_s": 2.7902185513614106e-12
+        },
+        {
+          "r12": 1.8379835746429647,
+          "r13": 2.2379835746429633,
+          "r23": 1.822596646010325,
+          "theta_deg": 52.0,
+          "dE": -3.135208829614669,
+          "barrier": 5.84898484752298,
+          "lifetime_s": 1.0432270563635115e-12
+        },
+        {
+          "r12": 1.8129835746429648,
+          "r13": 1.8379835746429647,
+          "r23": 2.247846150366859,
+          "theta_deg": 76.0,
+          "dE": -3.0940861735157252,
+          "barrier": 5.807862191424037,
+          "lifetime_s": 1.0261690016449808e-12
+        },
+        {
+          "r12": 1.8379835746429647,
+          "r13": 2.1629835746429635,
+          "r23": 2.1380289474939533,
+          "theta_deg": 64.0,
+          "dE": -2.8398759773126017,
+          "barrier": 5.553651995220913,
+          "lifetime_s": 9.267398297543816e-13
+        },
+        {
+          "r12": 1.8379835746429647,
+          "r13": 2.062983574642964,
+          "r23": 2.1893539661793193,
+          "theta_deg": 68.0,
+          "dE": -2.7891069679687135,
+          "barrier": 5.502882985877025,
+          "lifetime_s": 9.08067916291556e-13
+        }
+      ],
+      "log_K3": 11.076717696568101,
+      "log_K3_suppression": -3.013872822453047,
+      "trimer_fraction": 0.08170668096375532,
+      "dimer_fraction": 0.4460422134516754,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 908127.7852762004,
+      "eam_compatible": true,
+      "exact_pair_invariance": true,
+      "lammps_eam_max_abs_err": 0.00012237059017117247,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "coord_tanh_damped_cubic",
+      "description": "damped tanh counter, exact cubic hinge",
+      "n_params": 6,
+      "lam": 6.861579831876742,
+      "lam_min": 5.966591158153689,
+      "lam_over_eb": 0.6311112876369002,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -5.555778813456964,
+      "worst_trimer_geom": [
+        1.8099855070379094,
+        1.8099855070379094,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.8523698626524165,
+      "n_traps": 2,
+      "worst_trap_barrier": 12.88685909760413,
+      "worst_trap_lifetime_ps": 17.529021574172287,
+      "worst_trap_dE": -5.549830492562174,
+      "traps": [
+        {
+          "r12": 1.7879835746429649,
+          "r13": 1.7879835746429649,
+          "r23": 3.5759671492859297,
+          "theta_deg": 180.0,
+          "dE": -5.549830492562174,
+          "barrier": 12.754413011853817,
+          "lifetime_s": 1.662253338161306e-11
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 1.7879835746429649,
+          "r23": 1.7879835746429646,
+          "theta_deg": 59.99999999999999,
+          "dE": -2.118859862121788,
+          "barrier": 12.88685909760413,
+          "lifetime_s": 1.7529021574172288e-11
+        }
+      ],
+      "log_K3": 9.963473753149387,
+      "log_K3_suppression": -4.127116765871762,
+      "trimer_fraction": 0.029970759631519028,
+      "dimer_fraction": 0.4800869316820189,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 939707.8960013276,
+      "eam_compatible": true,
+      "exact_pair_invariance": true,
+      "lammps_eam_max_abs_err": 1.7431634802278495e-08,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "coord_gauss_tanh_sq",
+      "description": "Gaussian counter, tanh-squared hinge (explorer default)",
+      "n_params": 4,
+      "lam": 6.600493679181296,
+      "lam_min": 5.739559721027215,
+      "lam_over_eb": 0.6070972235220594,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.003983627298273112,
+      "dlnK_pair": -0.000497428829834945,
+      "worst_trimer_dE": -5.555778813456966,
+      "worst_trimer_geom": [
+        1.8099855070379094,
+        1.8099855070379094,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.8523698626524148,
+      "n_traps": 5,
+      "worst_trap_barrier": 8.33778148618364,
+      "worst_trap_lifetime_ps": 2.8294913418855034,
+      "worst_trap_dE": -5.557707422823687,
+      "traps": [
+        {
+          "r12": 1.8129835746429648,
+          "r13": 1.8129835746429648,
+          "r23": 3.6259671492859296,
+          "theta_deg": 180.0,
+          "dE": -5.557707422823687,
+          "barrier": 8.33778148618364,
+          "lifetime_s": 2.8294913418855035e-12
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 2.2129835746429634,
+          "r23": 1.7950235806402952,
+          "theta_deg": 52.0,
+          "dE": -3.6197349116321984,
+          "barrier": 6.399808974992153,
+          "lifetime_s": 1.3010199900304687e-12
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 1.7879835746429649,
+          "r23": 2.201585210845464,
+          "theta_deg": 76.0,
+          "dE": -3.6140912712988076,
+          "barrier": 6.394165334658762,
+          "lifetime_s": 1.2980796562188948e-12
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 2.1629835746429635,
+          "r23": 2.117708285356607,
+          "theta_deg": 64.0,
+          "dE": -3.5127899241335685,
+          "barrier": 6.292863987493523,
+          "lifetime_s": 1.2464175536519174e-12
+        },
+        {
+          "r12": 2.1629835746429635,
+          "r13": 2.1629835746429635,
+          "r23": 1.759529356356747,
+          "theta_deg": 48.00000000000001,
+          "dE": -3.5089490491155884,
+          "barrier": 6.289023112475543,
+          "lifetime_s": 1.2444997507832688e-12
+        }
+      ],
+      "log_K3": 11.159734907134943,
+      "log_K3_suppression": -2.930855611886205,
+      "trimer_fraction": 0.08766266830802301,
+      "dimer_fraction": 0.4420744328274966,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 904354.633770606,
+      "eam_compatible": true,
+      "exact_pair_invariance": false,
+      "lammps_eam_max_abs_err": 1.0085052792874194e-09,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "glue",
+      "description": "glue / valence-one embedding, density = bond strength",
+      "n_params": 4,
+      "lam": 13.046662228277764,
+      "lam_min": null,
+      "lam_over_eb": 1.2,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -3.1810536807134646,
+      "worst_trimer_geom": [
+        1.7849855070379095,
+        2.3599855070379077,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 3.227094995395916,
+      "n_traps": 5,
+      "worst_trap_barrier": 6.561209236576993,
+      "worst_trap_lifetime_ps": 1.3879879721167203,
+      "worst_trap_dE": -3.0799097786508653,
+      "traps": [
+        {
+          "r12": 1.7879835746429649,
+          "r13": 2.362983574642963,
+          "r23": 4.150967149285927,
+          "theta_deg": 180.0,
+          "dE": -3.0799097786508653,
+          "barrier": 6.561209236576993,
+          "lifetime_s": 1.3879879721167203e-12
+        },
+        {
+          "r12": 1.762983574642965,
+          "r13": 2.362983574642963,
+          "r23": 2.3602233628414955,
+          "theta_deg": 68.0,
+          "dE": 0.15922369429484817,
+          "barrier": 6.471249189507394,
+          "lifetime_s": 1.338821175967101e-12
+        },
+        {
+          "r12": 2.362983574642963,
+          "r13": 2.362983574642963,
+          "r23": 1.7703784543895096,
+          "theta_deg": 44.0,
+          "dE": 0.22807295134946948,
+          "barrier": 6.402399932452773,
+          "lifetime_s": 1.3023721073953449e-12
+        },
+        {
+          "r12": 1.7879835746429649,
+          "r13": 1.7879835746429649,
+          "r23": 3.5759671492859297,
+          "theta_deg": 180.0,
+          "dE": 0.6358287328981032,
+          "barrier": 2.845470725028025,
+          "lifetime_s": 3.12918175746309e-13
+        },
+        {
+          "r12": 1.762983574642965,
+          "r13": 1.762983574642965,
+          "r23": 2.3593325366031093,
+          "theta_deg": 84.0,
+          "dE": 1.9034098001406683,
+          "barrier": 5.856501359617701,
+          "lifetime_s": 1.0463754881253005e-12
+        }
+      ],
+      "log_K3": 9.413937454160644,
+      "log_K3_suppression": -4.6766530648605045,
+      "trimer_fraction": 0.0177398486185909,
+      "dimer_fraction": 0.48819693115700113,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 945952.0139430463,
+      "eam_compatible": true,
+      "exact_pair_invariance": true,
+      "lammps_eam_max_abs_err": 3.715072693921684e-10,
+      "lammps_table_max_abs_err": 5.052744000977327e-07
+    },
+    {
+      "track": "generic_C",
+      "penalty": "kts",
+      "description": "Kohen-Tully-Stillinger angular three-body (Skorpa et al.)",
+      "n_params": 5,
+      "lam": 236.30190597301666,
+      "lam_min": 205.4799182374058,
+      "lam_over_eb": 21.73446987483264,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -5.6589220202332,
+      "worst_trimer_geom": [
+        1.8849855070379091,
+        1.8849855070379091,
+        180.0
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 0.7492266558761811,
+      "n_traps": 4,
+      "worst_trap_barrier": 9.16652605451588,
+      "worst_trap_lifetime_ps": 3.9445984453421743,
+      "worst_trap_dE": -5.654665124930068,
+      "traps": [
+        {
+          "r12": 1.8879835746429645,
+          "r13": 1.8879835746429645,
+          "r23": 3.775967149285929,
+          "theta_deg": 180.0,
+          "dE": -5.654665124930068,
+          "barrier": 9.16652605451588,
+          "lifetime_s": 3.944598445342174e-12
+        },
+        {
+          "r12": 1.8879835746429645,
+          "r13": 2.2379835746429633,
+          "r23": 2.2064845538236484,
+          "theta_deg": 64.0,
+          "dE": 2.7026453917618536,
+          "barrier": 4.215108882534659,
+          "lifetime_s": 5.418777520262609e-13
+        },
+        {
+          "r12": 2.2379835746429633,
+          "r13": 2.262983574642963,
+          "r23": 1.8308507227830064,
+          "theta_deg": 48.00000000000001,
+          "dE": 2.762575326593776,
+          "barrier": 4.155178947702737,
+          "lifetime_s": 5.290135494722322e-13
+        },
+        {
+          "r12": 2.1879835746429634,
+          "r13": 2.2129835746429634,
+          "r23": 1.9293878637589092,
+          "theta_deg": 52.0,
+          "dE": 2.790375762974154,
+          "barrier": 4.127378511322359,
+          "lifetime_s": 5.231502102486918e-13
+        }
+      ],
+      "log_K3": 10.509685034506681,
+      "log_K3_suppression": -3.580905484514467,
+      "trimer_fraction": 0.04966153947417558,
+      "dimer_fraction": 0.46707914059669936,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 928381.7616119432,
+      "eam_compatible": false,
+      "exact_pair_invariance": true
+    },
+    {
+      "track": "generic_C",
+      "penalty": "sw",
+      "description": "Stillinger-Weber angular three-body, cos(theta0) = 1",
+      "n_params": 4,
+      "lam": 475.1165211477144,
+      "lam_min": 413.14480099801256,
+      "lam_over_eb": 43.70005258061464,
+      "unfixable_dE": 0.0,
+      "unfixable_at": null,
+      "max_pair_energy": 0.0,
+      "dlnK_pair": 0.0,
+      "worst_trimer_dE": -4.596203876547593,
+      "worst_trimer_geom": [
+        1.909985507037909,
+        1.909985507037909,
+        59.99999999999999
+      ],
+      "E_vdw": -6.408148676109381,
+      "vdw_geom": [
+        4.174755713392176,
+        4.184129463957986,
+        78.0
+      ],
+      "worst_trimer_vs_vdw": 1.8119447995617879,
+      "n_traps": 2,
+      "worst_trap_barrier": 13.114701310059033,
+      "worst_trap_lifetime_ps": 19.205594457354074,
+      "worst_trap_dE": -4.5968744792402845,
+      "traps": [
+        {
+          "r12": 1.9129835746429644,
+          "r13": 1.9129835746429644,
+          "r23": 1.9129835746429642,
+          "theta_deg": 59.99999999999999,
+          "dE": -4.5968744792402845,
+          "barrier": 13.114701310059033,
+          "lifetime_s": 1.9205594457354074e-11
+        },
+        {
+          "r12": 1.8379835746429647,
+          "r13": 2.362983574642963,
+          "r23": 3.0438496591876114,
+          "theta_deg": 92.0,
+          "dE": 4.891263485519954,
+          "barrier": 0.7662555979896277,
+          "lifetime_s": 1.359609987135452e-13
+        }
+      ],
+      "log_K3": 8.739272651976522,
+      "log_K3_suppression": -5.351317867044626,
+      "trimer_fraction": 0.009193538255775123,
+      "dimer_fraction": 0.4938772610349984,
+      "trimer_fraction_pair_only": 0.48891709557720514,
+      "dimer_fraction_pair_only": 0.19713126446472012,
+      "delta_B3": 950455.4236366632,
+      "eam_compatible": false,
+      "exact_pair_invariance": true
+    }
+  ],
+  "lambda_scans": {
+    "coord_hermite_cubic": [
+      {
+        "factor": 0.5,
+        "lam": 3.144411402693182,
+        "trimer_fraction": 0.20907966737975286,
+        "dimer_fraction": 0.3641927904659973,
+        "worst_trimer_dE": -12.997813347521717,
+        "worst_trap_barrier": 11.923178868639681,
+        "n_traps": 2
+      },
+      {
+        "factor": 0.8,
+        "lam": 5.031058244309092,
+        "trimer_fraction": 0.13619097770969923,
+        "dimer_fraction": 0.41066998117171805,
+        "worst_trimer_dE": -7.809903776469932,
+        "worst_trap_barrier": 8.416358874190701,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.0,
+        "lam": 6.288822805386364,
+        "trimer_fraction": 0.10772442804468137,
+        "dimer_fraction": 0.4290871073979695,
+        "worst_trimer_dE": -6.408148676109381,
+        "worst_trap_barrier": 8.152977702665561,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.15,
+        "lam": 7.232146226194319,
+        "trimer_fraction": 0.09224958392234783,
+        "dimer_fraction": 0.43915789730304344,
+        "worst_trimer_dE": -5.582331718593608,
+        "worst_trap_barrier": 8.173783210246391,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.5,
+        "lam": 9.433234208079547,
+        "trimer_fraction": 0.0677429568812906,
+        "dimer_fraction": 0.4551885996009308,
+        "worst_trimer_dE": -4.353262433706781,
+        "worst_trap_barrier": 7.8381209232386855,
+        "n_traps": 5
+      },
+      {
+        "factor": 2.0,
+        "lam": 12.577645610772729,
+        "trimer_fraction": 0.048014421852871414,
+        "dimer_fraction": 0.4681648990479531,
+        "worst_trimer_dE": -3.4449519007259823,
+        "worst_trap_barrier": 7.472199434876792,
+        "n_traps": 5
+      },
+      {
+        "factor": 4.0,
+        "lam": 25.155291221545458,
+        "trimer_fraction": 0.022338698295281102,
+        "dimer_fraction": 0.48514487033611253,
+        "worst_trimer_dE": -1.2072460444568485,
+        "worst_trap_barrier": 8.521188495479839,
+        "n_traps": 4
+      }
+    ],
+    "coord_quintic_cubic": [
+      {
+        "factor": 0.5,
+        "lam": 3.207668880750704,
+        "trimer_fraction": 0.19962034248362212,
+        "dimer_fraction": 0.3701665815187187,
+        "worst_trimer_dE": -12.793963944938177,
+        "worst_trap_barrier": 11.77524259498869,
+        "n_traps": 2
+      },
+      {
+        "factor": 0.8,
+        "lam": 5.132270209201127,
+        "trimer_fraction": 0.12560942949722848,
+        "dimer_fraction": 0.4174992880191104,
+        "worst_trimer_dE": -7.673201065206628,
+        "worst_trap_barrier": 8.376208174223226,
+        "n_traps": 2
+      },
+      {
+        "factor": 1.0,
+        "lam": 6.415337761501408,
+        "trimer_fraction": 0.09710142417856538,
+        "dimer_fraction": 0.43599601067696037,
+        "worst_trimer_dE": -6.408148676109381,
+        "worst_trap_barrier": 8.2542605615293,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.15,
+        "lam": 7.3776384257266185,
+        "trimer_fraction": 0.08170668096375532,
+        "dimer_fraction": 0.4460422134516754,
+        "worst_trimer_dE": -5.5857032916470954,
+        "worst_trap_barrier": 8.302918035495757,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.5,
+        "lam": 9.623006642252111,
+        "trimer_fraction": 0.057508202751096804,
+        "dimer_fraction": 0.4619126443678057,
+        "worst_trimer_dE": -3.773003209386496,
+        "worst_trap_barrier": 7.316066089118026,
+        "n_traps": 5
+      },
+      {
+        "factor": 2.0,
+        "lam": 12.830675523002816,
+        "trimer_fraction": 0.03832482959406659,
+        "dimer_fraction": 0.4745608066855012,
+        "worst_trimer_dE": -2.573474976897854,
+        "worst_trap_barrier": 6.347556541185169,
+        "n_traps": 2
+      },
+      {
+        "factor": 4.0,
+        "lam": 25.66135104600563,
+        "trimer_fraction": 0.01479856368804026,
+        "dimer_fraction": 0.49015062049065555,
+        "worst_trimer_dE": 0.34585734644632016,
+        "worst_trap_barrier": 7.705640594913367,
+        "n_traps": 3
+      }
+    ],
+    "glue": [
+      {
+        "factor": 0.5,
+        "lam": 6.523331114138882,
+        "trimer_fraction": 0.0523653337199822,
+        "dimer_fraction": 0.4652977676192856,
+        "worst_trimer_dE": -5.730374509840337,
+        "worst_trap_barrier": 8.174364592139696,
+        "n_traps": 5
+      },
+      {
+        "factor": 0.8,
+        "lam": 10.437329782622212,
+        "trimer_fraction": 0.02403373320334075,
+        "dimer_fraction": 0.4840207611169357,
+        "worst_trimer_dE": -3.206755579452608,
+        "worst_trap_barrier": 6.561209236576993,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.0,
+        "lam": 13.046662228277764,
+        "trimer_fraction": 0.0177398486185909,
+        "dimer_fraction": 0.48819693115700113,
+        "worst_trimer_dE": -3.1810536807134646,
+        "worst_trap_barrier": 6.561209236576993,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.15,
+        "lam": 15.003661562519428,
+        "trimer_fraction": 0.015410820754048688,
+        "dimer_fraction": 0.4897438331351048,
+        "worst_trimer_dE": -3.1810536807134646,
+        "worst_trap_barrier": 7.087214673397971,
+        "n_traps": 5
+      },
+      {
+        "factor": 1.5,
+        "lam": 19.569993342416645,
+        "trimer_fraction": 0.013049436388020209,
+        "dimer_fraction": 0.4913130633439199,
+        "worst_trimer_dE": -3.1810536807134646,
+        "worst_trap_barrier": 7.087214673397971,
+        "n_traps": 4
+      },
+      {
+        "factor": 2.0,
+        "lam": 26.09332445655553,
+        "trimer_fraction": 0.011965770913729018,
+        "dimer_fraction": 0.4920334820738122,
+        "worst_trimer_dE": -3.1810536807134646,
+        "worst_trap_barrier": 7.087214673397971,
+        "n_traps": 4
+      },
+      {
+        "factor": 4.0,
+        "lam": 52.18664891311106,
+        "trimer_fraction": 0.010989992262487798,
+        "dimer_fraction": 0.49268232912123094,
+        "worst_trimer_dE": -3.1810536807134646,
+        "worst_trap_barrier": 7.087214673397971,
+        "n_traps": 4
+      }
+    ]
+  }
+}

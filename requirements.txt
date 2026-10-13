@@ -1,0 +1,6 @@
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+pytest>=8
+# optional: verifies the exported LAMMPS files (pip wheel needs an MPI runtime, e.g. `pip install mpich`)
+lammps>=2024.8.29

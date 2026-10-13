@@ -1,0 +1,7 @@
+# Effective single-site Lennard-Jones parameters, Polat et al. (2024), Table 1
+# (Fluid Phase Equilibria; project PDF 1-s2.0-S037838122400061X-main.pdf).
+# Used here ONLY as a coarse-graining reference for the non-bonded (frozen-chemistry)
+# monomer-monomer interaction, not as experimental data. Verify the values against the paper.
+species,eps_over_kB_K,sigma_A
+NO2,262.17,3.727
+N2O4,445.00,4.450

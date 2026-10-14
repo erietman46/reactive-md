@@ -1,10 +1,13 @@
 # forcefield_calibration — pre-MD calibration of the reactive pair potential
 
-Calibrates the two-body potential `U2(r)` of the `2A <-> A2` model against
+Calibrates the two-body potential of the `2A <-> A2` model against
 equilibrium data, then adds and tests the valence-limiting (coordination)
-penalty. No molecular dynamics is run. Everything comes from one-, two- and
-three-particle integrals and energy surfaces, so the whole pipeline takes
-about 10 minutes on one core.
+penalty. Nine isotropic families `U2(r)` (A-I) are compared with four smooth
+Kern-Frenkel (patchy) families `U2(r, Omega_i, Omega_j)` (KF-A ... KF-D), which
+add the orientational entropy that an isotropic bead lacks. No molecular
+dynamics is run. Everything comes from one-, two- and three-particle
+integrals and energy surfaces, so the whole pipeline takes about 20 minutes
+on four cores.
 
 * **Method and reasoning:** [`docs/CALIBRATION_STRATEGY.md`](docs/CALIBRATION_STRATEGY.md)
 * **Results and recommendations:** [`docs/RESULTS.md`](docs/RESULTS.md)
@@ -17,14 +20,15 @@ pip install -r ../requirements.txt          # numpy, scipy, matplotlib, pytest (
 cd forcefield_calibration/scripts
 python run_all.py                            # or the stages one by one:
 python run_stage0_reference.py               # reference K_p(T), dH(T)          -> data/reference_Kp.csv
-python run_stage1_pair.py [A B ...]          # two-body fits, attainability,
+python run_stage1_pair.py [A KF-A ...]       # two-body fits, per-T anchoring, attainability,
                                              # sensitivity, barrier scans      -> results/stage1_*.json
+                                             # (--workers N: families in parallel)
 python run_stage1_generic.py                 # generic E1-E3 x K1-K3 design    -> results/generic_design.*
-python run_stage2_manybody.py                # coordination penalties          -> results/stage2_*.json
+python run_stage2_manybody.py                # coordination penalties, KF valence -> results/stage2_*.json
 python run_stage3_selection.py               # hard criteria + Pareto          -> results/model_selection.md
 python run_export.py                         # LAMMPS table + eam/fs files     -> export_lammps/
 python make_figures.py                       # all figures from the JSON       -> figures/
-cd .. && python -m pytest tests -q           # 39 tests (from the repository root: python -m pytest forcefield_calibration/tests)
+cd .. && python -m pytest tests -q           # 59 tests (from the repository root: python -m pytest forcefield_calibration/tests)
 ```
 
 Units: kJ/mol, Å, K throughout; LAMMPS exports are converted to `real`
@@ -39,10 +43,11 @@ forcefield_calibration/
 ├── potentials/                         Potential 1 (piecewise) and 2 (additive), exact ports
 │   ├── branches.py                     Morse, Mie, Wang–Frenkel, KTS, Gaussian, TT, switches
 │   ├── piecewise.py, additive.py
-│   └── candidates.py                   families A–F and their free parameters
+│   ├── kern_frenkel.py                 smooth Kern–Frenkel wrapper, exact orientation averages
+│   └── candidates.py                   families A–I, KF-A–KF-D and their free parameters
 ├── thermodynamics/                     Z_b, K_p, ΔH, ΔS, ΔCp, f_d, B2 split, finite box, TST
-├── optimization/                       fitting, attainability, sensitivity, barrier families
-├── manybody/                           penalties, trimer surfaces/traps, K3 and ΔB3
+├── optimization/                       fitting, attainability, per-T anchoring, sensitivity, barriers
+├── manybody/                           penalties, trimer surfaces/traps, K3 and ΔB3, KF valence
 ├── selection/                          smoothness, hard criteria, Pareto ranking
 ├── export/                             LAMMPS pair table + eam/fs writer, LAMMPS cross-check
 ├── scripts/                            the pipeline (see above)
@@ -76,3 +81,10 @@ pair_coeff   1 1 pair.table REACTIVE 10
 The pipeline checks each `eam/fs` file against the Python energies with
 the LAMMPS Python module (agreement ~1e-9 kJ/mol). NVE energy conservation
 has not been checked yet; that is the first MD validation step.
+
+The Kern–Frenkel models (`real_KF-A_anchored/`, `real_KF-B_anchored/`) have
+no native LAMMPS pair style. They are exported as two radial tables
+(`ALIGNED` = U_on, `MISALIGNED` = U_off) plus the patch parameters:
+`U = S U_on + (1 - S) U_off`, `S = f(n_i·r̂) f(-n_j·r̂)`,
+`f(c) = exp(-(1 - c)/w²)`. Running them needs a custom anisotropic pair
+style (or plugin) and rigid-body rotation of the beads.

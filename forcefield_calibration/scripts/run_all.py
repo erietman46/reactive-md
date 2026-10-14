@@ -1,4 +1,4 @@
-"""Run the complete pre-MD calibration pipeline (about 10 minutes on one core)."""
+"""Run the complete pre-MD calibration pipeline (about 20 minutes on four cores; Stage 1 runs the families in parallel)."""
 import run_export
 import run_stage0_reference
 import run_stage1_generic

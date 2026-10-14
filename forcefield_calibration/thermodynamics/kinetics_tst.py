@@ -14,6 +14,8 @@ TST dissociation rate (s^-1):
 
     k_d = sqrt(k_B T / (2 pi mu)) * 4 pi r_div^2 exp(-U(r_div)/RT) / Z_b
 
+(orientation-averaged Boltzmann factor at r_div for a Kern-Frenkel potential)
+
 association rate constant k_a = k_d K_V (A^3 s^-1), and the linearised
 chemical relaxation time of 2A <-> A2 at monomer density rho_A:
 
@@ -54,8 +56,10 @@ class TSTRates:
 
 
 def radial_free_energy(pot, r, T, r_ref=1.0):
-    """F(r) = U(r) - 2 RT ln(r / r_ref): free energy along r including the r^2 Jacobian."""
-    return pot.U(r) - 2.0 * R_KJ * T * np.log(np.asarray(r) / r_ref)
+    """F(r) = U(r) - 2 RT ln(r / r_ref): free energy along r including the r^2 Jacobian
+    (and, for a Kern-Frenkel potential, the orientational free energy -RT ln <exp(-beta E_ang)>)."""
+    r = np.asarray(r, float)
+    return pot.U(r) - 2.0 * R_KJ * T * np.log(r / r_ref) - R_KJ * T * pot.angular_terms(r, T)[0]
 
 
 def tst_rates(pot, T, reduced_mass_gmol) -> TSTRates:
@@ -64,7 +68,8 @@ def tst_rates(pot, T, reduced_mass_gmol) -> TSTRates:
     beta = 1.0 / (R_KJ * T)
     mu = reduced_mass_gmol * AMU
     v = np.sqrt(KB * T / (2 * np.pi * mu)) * 1e10  # A/s
-    log_kd = np.log(v * 4 * np.pi * rd ** 2) - beta * float(pot.U(rd)) - bs.log_Zb
+    la = float(pot.angular_terms(np.array([rd]), T)[0][0])
+    log_kd = np.log(v * 4 * np.pi * rd ** 2) - beta * float(pot.U(rd)) + la - bs.log_Zb
     F = lambda x: float(radial_free_energy(pot, x, T))
     L = pot.landscape()
     dF_d = F(rd) - F(L.bond.r)

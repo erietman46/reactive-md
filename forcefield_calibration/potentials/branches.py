@@ -119,7 +119,7 @@ def kts_k(q, r):
 
 # ------------------------------------------------------------ dispatch layer
 BOND_FORMS = ("morse", "mie", "wf", "kts")
-FLUID_FORMS = ("morse", "mie", "wf")
+FLUID_FORMS = ("morse", "mie", "wf", "kts")
 
 
 def bond_branch(r, p):
@@ -157,6 +157,8 @@ def fluid_branch(r, p):
         return mie(r, p["rf"], p["ef"], p["nf"], p["mf"])
     if f == "wf":
         return wf(r, wf_par(p["rf"], p["ef"], p["xf"]))
+    if f == "kts":
+        return kts(r, kts_par(p["rf"], p["ef"], p["pkf"], p["g2f"], p["rcf"]))
     raise ValueError(f"unknown fluid form {f!r}")
 
 
@@ -168,7 +170,19 @@ def fluid_k(p):
         return mie_k(p["rf"], p["ef"], p["nf"], p["mf"])
     if f == "wf":
         return wf_k(wf_par(p["rf"], p["ef"], p["xf"]), p["rf"])
+    if f == "kts":
+        return kts_k(kts_par(p["rf"], p["ef"], p["pkf"], p["g2f"], p["rcf"]), p["rf"])
     raise ValueError(f)
+
+
+def fluid_cutoff(p):
+    """Intrinsic cut-off of the non-bonded branch (inf for Morse/Mie)."""
+    f = p["formF"]
+    if f == "wf":
+        return float(wf_par(p["rf"], p["ef"], p["xf"])["rc"])
+    if f == "kts":
+        return float(p["rcf"])
+    return np.inf
 
 
 def shape_for_stiffness(p, kb):

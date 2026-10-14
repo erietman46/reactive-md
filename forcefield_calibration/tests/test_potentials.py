@@ -6,7 +6,7 @@ import pytest
 
 from forcefield_calibration.potentials.additive import AdditivePotential
 from forcefield_calibration.potentials.branches import bond_k, shape_for_stiffness
-from forcefield_calibration.potentials.candidates import candidate_families
+from forcefield_calibration.potentials.candidates import ISOTROPIC, candidate_families
 from forcefield_calibration.potentials.piecewise import PiecewisePotential
 
 REF = json.loads((Path(__file__).parent / "explorer_reference.json").read_text())
@@ -38,7 +38,7 @@ def test_additive_matches_explorer(i):
         assert L.barrier.r == pytest.approx(s["cl"]["bar"]["r"], abs=1e-6)
 
 
-@pytest.mark.parametrize("label", list("ABCDEF"))
+@pytest.mark.parametrize("label", list(ISOTROPIC))
 def test_candidates_clean_and_smooth(label):
     pot = candidate_families()[label]
     assert pot.landscape().clean

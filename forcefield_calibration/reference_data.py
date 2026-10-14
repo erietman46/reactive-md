@@ -175,3 +175,16 @@ def k_bond_md_max(c=None):
     omega = 2 * np.pi / period
     k_SI = mu * omega ** 2                            # J/m^2 per pair
     return k_SI * NA * 1e-3 * 1e-20                   # kJ/mol/A^2
+
+
+def no2_libration_inertia(c=None):
+    """Moments of inertia (amu A^2) for libration of the NO2 C2 axis: (I_A, I_C) from A and C."""
+    c = c or constraints()
+    A, _, C = c["NO2_rotational_constants_cm1"]["value"]
+    return 16.857629 / A, 16.857629 / C
+
+
+def libration_period_md_min(c=None):
+    """Shortest libration period (fs) that still spans ``md_min_steps_per_libration_period`` steps."""
+    c = c or constraints()
+    return c["md_timestep_fs"] * c["md_min_steps_per_libration_period"]

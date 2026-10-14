@@ -9,15 +9,15 @@
     "params": {
       "formB": "morse",
       "rb": 1.78,
-      "eb": 28.225428152412647,
+      "eb": 28.30146004939959,
       "n": 12.0,
       "m": 6.0,
       "xb": 2.0,
       "pk": 4.0,
       "g2": 3.902767,
       "rcb": 2.8,
-      "bb": 3.205374146379087,
-      "rh": 2.6,
+      "bb": 3.201065630511906,
+      "rh": 2.4500000000000006,
       "Eh": 5.0,
       "kh": null,
       "formF": "mie",
@@ -27,21 +27,24 @@
       "mf": 6.0,
       "xf": 2.0,
       "bf": 1.5,
+      "pkf": 4.0,
+      "g2f": 3.0,
+      "rcf": 8.0,
       "rin": 8.0,
       "rout": 10.0
     },
-    "kh": 39.71691173621411,
+    "kh": 34.06510345289804,
     "landscape": {
       "name": "A: piecewise Morse | quintic barrier | Mie 12-6",
       "family": "piecewise",
       "clean": true,
       "r_bond": 1.7799999999999998,
-      "u_bond": -28.225428152412647,
-      "r_barrier": 2.599999999999998,
-      "u_barrier": 5.0,
-      "r_disp": 4.183416054049033,
-      "u_disp": -1.9759878019298545,
-      "k_bond": 580.0067048789101,
+      "u_bond": -28.30146004939959,
+      "r_barrier": 2.45,
+      "u_barrier": 5.000000000000033,
+      "r_disp": 4.1834160540490295,
+      "u_disp": -1.9759878019298427,
+      "k_bond": 580.0106744441528,
       "rcut": 10.0
     },
     "units": {
@@ -51,18 +54,18 @@
   },
   "manybody": {
     "kind": "coord_hermite_cubic",
-    "lam_kJmol": 54.61129208765279,
-    "lam_min_kJmol": 27.305646043826396,
+    "lam_kJmol": 57.227147783521424,
+    "lam_min_kJmol": 28.613573891760712,
     "lam_factor": 2.0,
     "strength_reference": "dimer + monomer van der Waals complex",
     "hinge": "cubic",
     "delta": 0.05,
     "counter": {
       "kind": "hermite",
-      "r1": 2.239999999999999,
-      "W": 1.1199999999999983
+      "r1": 2.165,
+      "W": 0.9700000000000006
     },
-    "reach_A": 2.799999999999998
+    "reach_A": 2.6500000000000004
   },
   "lammps": {
     "pair_only": [
@@ -80,24 +83,24 @@
   "verification": [
     {
       "config": 0,
-      "python_pair": -28.225428152412647,
-      "python_total": -28.225428152412647,
-      "lammps_table": -28.225435548291877,
-      "lammps_eam": -28.2254281524144
+      "python_pair": -28.30146004939959,
+      "python_total": -28.30146004939959,
+      "lammps_table": -28.301471547462985,
+      "lammps_eam": -28.301460049400216
     },
     {
       "config": 1,
-      "python_pair": -57.05669204661097,
-      "python_total": -6.411402984247033,
-      "lammps_table": -57.05669511569637,
-      "lammps_eam": -6.411402942033486
+      "python_pair": -57.39688213226812,
+      "python_total": -5.041108941010016,
+      "lammps_table": -57.396886640163025,
+      "lammps_eam": -5.0411088734658565
     },
     {
       "config": 2,
-      "python_pair": -84.67628356767347,
-      "python_total": 67.42325185336279,
-      "lammps_table": -84.67630608089279,
-      "lammps_eam": 67.42325185257508
+      "python_pair": -84.90437925863445,
+      "python_total": 72.41718746635077,
+      "lammps_table": -84.90441425125155,
+      "lammps_eam": 72.41718746519548
     }
   ]
 }

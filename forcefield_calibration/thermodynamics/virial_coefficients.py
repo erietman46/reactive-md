@@ -14,7 +14,8 @@ Woolley / Stogryn-Hirschfelder for an associating gas: the *apparent* second
 virial coefficient of an equilibrium NO2/N2O4 mixture, expressed per NO2
 formula unit, equals B2 of the full model, while its "physical" part is
 B2_frozen.  It also shows why K_p and B2 are not independent targets: when
-association is strong, B2 ~ -N_A K_V.
+association is strong, B2 ~ -N_A K_V.  For a Kern-Frenkel potential the
+Mayer function is averaged over both orientations (``pot.angular_terms``).
 """
 from __future__ import annotations
 
@@ -45,7 +46,7 @@ def _outer_mayer(pot, T, r_from, r_max=None, dr=0.01):
     n = max(50, int(np.ceil((r_max - r_from) / dr)))
     edges = np.unique(np.r_[np.linspace(r_from, r_max, n + 1), [b for b in pot.breakpoints() if r_from < b < r_max]])
     r, w = gl_nodes(edges)
-    return -2.0 * np.pi * np.sum(w * r * r * np.expm1(-beta * pot.U(r)))
+    return -2.0 * np.pi * np.sum(w * r * r * np.expm1(-beta * pot.U(r) + pot.angular_terms(r, T)[0]))
 
 
 def B2(pot, T, r_div=None) -> VirialB2:
@@ -66,7 +67,7 @@ def B2_plain(pot, T, r_min=1e-3):
     edges = np.linspace(r_min, r_max, 6001)
     r, w = gl_nodes(edges)
     with np.errstate(over="ignore"):
-        f = np.expm1(-beta * pot.U(r))
+        f = np.expm1(-beta * pot.U(r) + pot.angular_terms(r, T)[0])
     return -2.0 * np.pi * np.sum(w * r * r * f) * NA * A3_TO_CM3
 
 

@@ -1,0 +1,263 @@
+{
+  "T": 298.15,
+  "rho0": 2.4293042146704413e-05,
+  "rows": [
+    {
+      "family": "KF-A",
+      "penalty": "none (patch only)",
+      "lam": null,
+      "w_deg": 24.032961807242874,
+      "E_vdw": -3.9685192720020517,
+      "worst_second_bond_dE": 16.490867223370522,
+      "worst_second_bond_at": [
+        2.45,
+        162.0
+      ],
+      "relaxed_trimer_dE": 16.490800751177872,
+      "relaxed_trimer_vs_vdw": 20.459320023179924,
+      "relaxed_trimer": {
+        "dE": 16.490800751177872,
+        "r12": 2.45,
+        "r13": 1.7800023958450304,
+        "theta_deg": 162.73171625335758,
+        "patch_angles_deg": [
+          1.7517970596881582e-05,
+          0.419038773233426,
+          5.72728773124927e-06
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 9.61287008871654,
+      "log_K2": 12.574967580029783,
+      "pair_bound_excess": 1.4058802488640136,
+      "trimer_fraction_bound": 3.3729190665680793e-07,
+      "dimer_fraction": 0.7664559708772819,
+      "trimer_fraction_isotropic_same_curve": 0.9999999707975288
+    },
+    {
+      "family": "KF-A",
+      "penalty": "coord_hermite_cubic",
+      "lam": 200.409415898223,
+      "w_deg": 24.032961807242874,
+      "E_vdw": -3.9685192720020517,
+      "worst_second_bond_dE": 16.786668073711727,
+      "worst_second_bond_at": [
+        2.45,
+        162.0
+      ],
+      "relaxed_trimer_dE": 16.774674011650667,
+      "relaxed_trimer_vs_vdw": 20.74319328365272,
+      "relaxed_trimer": {
+        "dE": 16.774674011650667,
+        "r12": 1.7864901652945595,
+        "r13": 2.45,
+        "theta_deg": 161.59448286176212,
+        "patch_angles_deg": [
+          3.5909277041604885e-05,
+          5.364525538484669e-05,
+          4.061699622919708
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 7.9557450775627565,
+      "log_K2": 12.574967580029783,
+      "pair_bound_excess": 1.4058802488640136,
+      "trimer_fraction_bound": 6.431701400416262e-08,
+      "dimer_fraction": 0.7664562077620751,
+      "trimer_fraction_isotropic_same_curve": 0.9999999707975288
+    },
+    {
+      "family": "KF-B",
+      "penalty": "none (patch only)",
+      "lam": null,
+      "w_deg": 27.1509008066959,
+      "E_vdw": -3.674725037748712,
+      "worst_second_bond_dE": 2.1267573783584766,
+      "worst_second_bond_at": [
+        2.9308184071530645,
+        124.0
+      ],
+      "relaxed_trimer_dE": 2.1262057869821334,
+      "relaxed_trimer_vs_vdw": 5.8009308247308455,
+      "relaxed_trimer": {
+        "dE": 2.1262057869821334,
+        "r12": 2.9308184071530645,
+        "r13": 1.7800136936176039,
+        "theta_deg": 123.32560866159356,
+        "patch_angles_deg": [
+          0.0004974812368332789,
+          0.08436803309903043,
+          3.474344759864676e-05
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 15.805645600193511,
+      "log_K2": 12.57496758003177,
+      "pair_bound_excess": 1.3991671944671555,
+      "trimer_fraction_bound": 0.00016495774956563943,
+      "dimer_fraction": 0.7663131158258855,
+      "trimer_fraction_isotropic_same_curve": 0.9999999776423283
+    },
+    {
+      "family": "KF-B",
+      "penalty": "coord_hermite_cubic",
+      "lam": 35395358.78988621,
+      "w_deg": 27.1509008066959,
+      "E_vdw": -3.674725037748712,
+      "worst_second_bond_dE": 3099.6550055431394,
+      "worst_second_bond_at": [
+        2.9308184071530645,
+        124.0
+      ],
+      "relaxed_trimer_dE": 4.445487660381801,
+      "relaxed_trimer_vs_vdw": 8.120212698130512,
+      "relaxed_trimer": {
+        "dE": 4.445487660381801,
+        "r12": 1.8791028133472925,
+        "r13": 2.9308184071530645,
+        "theta_deg": 119.1999854533425,
+        "patch_angles_deg": [
+          0.000496458914073605,
+          7.244509618354405e-06,
+          29.80639047107959
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 13.086213225762627,
+      "log_K2": 12.57496758003177,
+      "pair_bound_excess": 1.3991671944671555,
+      "trimer_fraction_bound": 1.0875566938854842e-05,
+      "dimer_fraction": 0.7664468258749345,
+      "trimer_fraction_isotropic_same_curve": 0.9999999776423283
+    },
+    {
+      "family": "KF-C",
+      "penalty": "none (patch only)",
+      "lam": null,
+      "w_deg": 23.967065225644237,
+      "E_vdw": -5.838735824217193,
+      "worst_second_bond_dE": 15.31286280086428,
+      "worst_second_bond_at": [
+        2.456212906919446,
+        162.0
+      ],
+      "relaxed_trimer_dE": 15.31283189376149,
+      "relaxed_trimer_vs_vdw": 21.151567717978683,
+      "relaxed_trimer": {
+        "dE": 15.31283189376149,
+        "r12": 2.456212906919446,
+        "r13": 1.7800018993582958,
+        "theta_deg": 161.64008499015068,
+        "patch_angles_deg": [
+          2.1900583802360337e-05,
+          0.2882480757894353,
+          6.502146373618258e-06
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 9.970624718203533,
+      "log_K2": 12.574967580029782,
+      "pair_bound_excess": 1.4059326463520243,
+      "trimer_fraction_bound": 4.823659847522157e-07,
+      "dimer_fraction": 0.7664558449834968,
+      "trimer_fraction_isotropic_same_curve": 0.9999999709393497
+    },
+    {
+      "family": "KF-C",
+      "penalty": "coord_hermite_cubic",
+      "lam": 180.5266146840332,
+      "w_deg": 23.967065225644237,
+      "E_vdw": -5.838735824217193,
+      "worst_second_bond_dE": 15.568518795690647,
+      "worst_second_bond_at": [
+        2.456212906919446,
+        162.0
+      ],
+      "relaxed_trimer_dE": 15.55960694464617,
+      "relaxed_trimer_vs_vdw": 21.398342768863362,
+      "relaxed_trimer": {
+        "dE": 15.55960694464617,
+        "r12": 2.456212906919446,
+        "r13": 1.7855976190528722,
+        "theta_deg": 160.70596207829556,
+        "patch_angles_deg": [
+          3.200227901013354e-05,
+          0.0,
+          3.4150945850063763e-06
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 8.386290093792761,
+      "log_K2": 12.574967580029782,
+      "pair_bound_excess": 1.4059326463520243,
+      "trimer_fraction_bound": 9.892570928593656e-08,
+      "dimer_fraction": 0.7664561777290063,
+      "trimer_fraction_isotropic_same_curve": 0.9999999709393497
+    },
+    {
+      "family": "KF-D",
+      "penalty": "none (patch only)",
+      "lam": null,
+      "w_deg": 24.072912692241516,
+      "E_vdw": -3.96851927200204,
+      "worst_second_bond_dE": 16.490603328894835,
+      "worst_second_bond_at": [
+        2.4500000000000046,
+        162.0
+      ],
+      "relaxed_trimer_dE": 16.490537072840546,
+      "relaxed_trimer_vs_vdw": 20.459056344842587,
+      "relaxed_trimer": {
+        "dE": 16.490537072840546,
+        "r12": 2.4500000000000046,
+        "r13": 1.7800018724734583,
+        "theta_deg": 162.73081949754712,
+        "patch_angles_deg": [
+          1.4886052178675807e-05,
+          0.7227685692622551,
+          7.091976543484069e-06
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 9.617621456548259,
+      "log_K2": 12.574967580029783,
+      "pair_bound_excess": 1.4059142974528864,
+      "trimer_fraction_bound": 3.3889831695058307e-07,
+      "dimer_fraction": 0.7664559694832556,
+      "trimer_fraction_isotropic_same_curve": 0.999999970433828
+    },
+    {
+      "family": "KF-D",
+      "penalty": "coord_hermite_cubic",
+      "lam": 200.40068866297136,
+      "w_deg": 24.072912692241516,
+      "E_vdw": -3.96851927200204,
+      "worst_second_bond_dE": 16.786391297986935,
+      "worst_second_bond_at": [
+        2.4500000000000046,
+        162.0
+      ],
+      "relaxed_trimer_dE": 16.774602284543164,
+      "relaxed_trimer_vs_vdw": 20.743121556545205,
+      "relaxed_trimer": {
+        "dE": 16.774602284543164,
+        "r12": 1.786485937438926,
+        "r13": 2.4500000000000046,
+        "theta_deg": 161.61332870479328,
+        "patch_angles_deg": [
+          6.156649318399953e-06,
+          6.502146373618258e-06,
+          63.73924649578289
+        ],
+        "n_starts": 40
+      },
+      "log_K3_bound": 7.959177661068219,
+      "log_K2": 12.574967580029783,
+      "pair_bound_excess": 1.4059142974528864,
+      "trimer_fraction_bound": 6.45381668470092e-08,
+      "dimer_fraction": 0.7664562075701604,
+      "trimer_fraction_isotropic_same_curve": 0.999999970433828
+    }
+  ],
+  "note": "trimer fractions are rigorous upper bounds (patchy_valence.trimer_equilibrium_kf)"
+}

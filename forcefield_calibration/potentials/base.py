@@ -42,6 +42,7 @@ class PairPotential:
 
     family = "base"
     defaults: dict = {}
+    anisotropic = False
 
     def __init__(self, name: str | None = None, **params):
         p = copy.deepcopy(self.defaults)
@@ -71,6 +72,14 @@ class PairPotential:
 
     def nominal_bond_radius(self) -> float:
         return self.p.get("rb", 1.0)
+
+    def angular_terms(self, r, T):
+        """Orientation average at fixed r: (ln <exp(-beta E_ang)>, <E_ang>, <E_ang^2>).
+
+        Zero for isotropic potentials; overridden by the Kern-Frenkel wrapper,
+        whose U(r) is then the aligned curve and E_ang the orientation-dependent rest."""
+        z = np.zeros_like(np.asarray(r, float))
+        return z, z, z
 
     # -- public API -------------------------------------------------------
     def replace(self, name: str | None = None, **kw) -> "PairPotential":

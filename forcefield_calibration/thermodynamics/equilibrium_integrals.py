@@ -6,6 +6,10 @@ For two identical structureless particles with pair potential U(r) the bound
     Z_b(T) = 4 pi  int_0^{r_div} r^2 exp(-U(r)/RT) dr          [A^3]
 
 with ``r_div`` the dividing surface (by default the barrier maximum r_double-dagger).
+For an orientation-dependent (Kern-Frenkel) potential exp(-U/RT) is replaced by
+its average over both orientations at fixed r (the rotational momenta cancel
+between monomers and dimers); ``pot.angular_terms`` supplies that average.
+
 The dilute-gas association constant in number-density units is
 
     K_V = rho_A2 / rho_A^2 = Z_b / 2                           [A^3]
@@ -126,16 +130,19 @@ def bound_state(pot, T, r_div=None, extra_energy=None) -> BoundState:
     U = pot.U(r)
     if extra_energy is not None:
         U = U + extra_energy(r)
+    la, e1, e2 = pot.angular_terms(r, T)
     beta = 1.0 / (R_KJ * T)
     with np.errstate(over="ignore"):
-        x = -beta * (U - umin)
+        x = -beta * (U - umin) + la
     x = np.where(np.isfinite(x), x, -np.inf)
     xm = np.max(x)
     g = w * r * r * np.exp(x - xm)
     s = g.sum()
     live = g > 0  # ignore nodes deep in the repulsive wall (U may be ~1e300 there)
-    mean = float((g[live] * U[live]).sum() / s)
-    var = float((g[live] * (U[live] - mean) ** 2).sum() / s)
+    gl, Ul, e1l, e2l = g[live], U[live], e1[live], e2[live]
+    mean = float((gl * (Ul + e1l)).sum() / s)
+    d = Ul - mean
+    var = float((gl * (d * d + 2.0 * d * e1l + e2l)).sum() / s)
     log_Zb = float(np.log(4.0 * np.pi * s) + xm - beta * umin)
     return BoundState(T, float(r_div), log_Zb, mean, var)
 
@@ -186,7 +193,7 @@ def finite_box_two_particle(pot, T, L_box):
     beta = 1.0 / (R_KJ * T)
     edges = np.linspace(rd, L_box / 2, 2001)
     r, w = gl_nodes(edges)
-    integ = 4 * np.pi * np.sum(w * r * r * np.expm1(-beta * pot.U(r)))
+    integ = 4 * np.pi * np.sum(w * r * r * np.expm1(-beta * pot.U(r) + pot.angular_terms(r, T)[0]))
     Z_u = L_box ** 3 - 4.0 / 3.0 * np.pi * rd ** 3 + integ
     Zb = np.exp(bs.log_Zb)
     Pb = Zb / (Zb + Z_u)

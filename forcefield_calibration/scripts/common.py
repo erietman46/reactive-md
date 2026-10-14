@@ -31,8 +31,17 @@ FD_TARGETS = {"E1 monomer-rich": 0.2, "E2 mixed": 0.5, "E3 dimer-rich": 0.8}
 TAU_RATIOS = {"K1 fast": 1.0, "K2 medium": 10.0, "K3 slow": 100.0}
 
 # ---------------------------------------------------------------- plot style
-PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
-FAMILY_COLOR = {k: PALETTE[i] for i, k in enumerate("ABCDEF")}
+# categorical order, validated for CVD separation on the light surface (dataviz validate_palette.js)
+PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948", "#11a3b5"]
+FAMILY_COLOR = {k: PALETTE[i] for i, k in enumerate("ABCDEFGHI")}
+# Kern-Frenkel families: colour of their radial construction, dashed lines in the figures
+FAMILY_COLOR.update({"KF-A": FAMILY_COLOR["A"], "KF-B": FAMILY_COLOR["I"], "KF-C": FAMILY_COLOR["G"],
+                     "KF-D": FAMILY_COLOR["B"]})
+
+
+def family_style(label):
+    """Line colour and style of a family: KF families are dashed in the colour of their radial parent."""
+    return dict(color=FAMILY_COLOR[label], ls="--" if label.startswith("KF") else "-")
 INK, INK2, MUTED, GRID, SURFACE = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df", "#fcfcfb"
 
 
@@ -101,7 +110,9 @@ def potential_record(pot):
 
 def rebuild(rec):
     from forcefield_calibration.potentials.additive import AdditivePotential
+    from forcefield_calibration.potentials.kern_frenkel import KernFrenkelPotential
     from forcefield_calibration.potentials.piecewise import PiecewisePotential
 
-    cls = {"PiecewisePotential": PiecewisePotential, "AdditivePotential": AdditivePotential}[rec["class_name"]]
+    cls = {"PiecewisePotential": PiecewisePotential, "AdditivePotential": AdditivePotential,
+           "KernFrenkelPotential": KernFrenkelPotential}[rec["class_name"]]
     return cls(name=rec["name"], **rec["params"])

@@ -6,12 +6,82 @@ Hard criteria: clean landscape, C1 force, bond stiffness below the MD limit, bar
 
 | family | hard pass | Pareto | C2 | rms lnK fit | rms lnK test | |dH err| 298 K (kJ/mol) | B2frozen rms/sigma | |dlnK/dln tau| | dB2frozen per decade tau | tau span (decades) | free params | log10 cond | k_b needed for K and dH | eps_b = 6 at k_b = 580 valid |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| B | yes | yes | True | 1.15 | 2.85 | 27.9 | 1.16 | 0.00507 | 11.6 | 5.08 | 5 | 3.16 | 2.74e+12 | no |
-| A | yes | yes | True | 1.15 | 2.85 | 27.9 | 1.16 | 0.00503 | 11.6 | 5.08 | 5 | 3.16 | 2.74e+12 | no |
-| F | yes | yes | True | 1.15 | 2.85 | 27.9 | 1.16 | 0.00495 | 11.6 | 5.08 | 5 | 3.16 | - | no |
-| E | yes | yes | True | 1.15 | 2.85 | 27.9 | 0.312 | 0.00496 | 13.9 | 5.08 | 6 | 4.49 | - | no |
+| B | yes | yes | True | 1.14 | 2.83 | 27.7 | 1.61 | 0.00693 | 11.9 | 5.08 | 5 | 3.22 | 2.74e+12 | yes |
+| A | yes | yes | True | 1.14 | 2.83 | 27.8 | 1.61 | 0.00686 | 11.9 | 5.08 | 5 | 3.22 | 2.74e+12 | yes |
+| F | yes | yes | True | 1.15 | 2.84 | 27.8 | 1.61 | 0.00676 | 11.9 | 5.08 | 5 | 3.22 | - | yes |
+| I | yes | yes | True | 1.17 | 2.9 | 28.2 | 1.46 | 0.000468 | 1.31 | 6.62 | 5 | 3.44 | 3.51e+12 | yes |
+| KF-A | yes | yes | True | 0.00419 | 0.0313 | 3.55e-13 | 1.46 | 0.0658 | 9.11 | 6.17 | 6 | 4.41 | 580 | yes |
+| KF-D | yes | yes | True | 0.00419 | 0.0314 | 3.41e-13 | 1.46 | 0.0658 | 9.11 | 6.17 | 6 | 4.41 | 580 | yes |
+| KF-B | yes | yes | True | 0.00677 | 0.0891 | 8.53e-13 | 1.54 | 0.0981 | 0.675 | 9.03 | 6 | 4.03 | 580 | yes |
+| G | yes | yes | True | 1.14 | 2.83 | 27.8 | 1.01 | 0.00683 | 13.9 | 5.08 | 6 | 4.29 | 2.74e+12 | yes |
+| E | yes | yes | True | 1.14 | 2.84 | 27.8 | 1.01 | 0.00681 | 13.9 | 5.08 | 6 | 4.28 | - | yes |
+| H | yes | yes | True | 1.17 | 2.9 | 28.2 | 0.335 | 0.000468 | 1.26 | 6.62 | 6 | 5.09 | 3.51e+12 | yes |
 | C | yes | yes | True | 1.17 | 2.9 | 28.2 | 0.332 | 0.000468 | 1.3 | 6.62 | 6 | 5.11 | 3.51e+12 | yes |
 | D | yes | yes | True | 1.16 | 2.92 | 27.7 | 0.581 | 0.000398 | 8.38 | 6.51 | 6 | 3.59 | 1.34e+13 | yes |
+| KF-C | yes | yes | True | 0.00421 | 0.0315 | 3.69e-13 | 1.15 | 0.0659 | 10.6 | 6.16 | 7 | 7.1 | 580 | yes |
+
+
+
+## 1b. Equilibrium mapping: isotropic versus Kern-Frenkel
+
+physical: k_b = 580, eps_b (+ barrier position, + patch width w for KF) fitted to ln K at the fit temperatures; anchored: k_b = 580, ln K exact at 298.15 K (KF: ln K and dH exact via w). rms dH over all nine temperatures. Libration period of the patch about the NO2 a axis (MD limit 20 fs).
+
+| family | phys eps_b | phys r_barrier nominal | phys rms lnK fit | phys rms lnK test | phys dH err 298 | phys rms dH | anch eps_b | anch rms lnK fit | anch rms lnK test | anch dH err 298 | anch rms dH | anch dS 298 (J/mol/K) | anch dCp 298 | w (deg) | kappa (kJ/mol/rad^2) | libration (fs) | tau_d TST 298 (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A | 24.2 | 2.45 | 1.14 | 2.83 | 31.9 | 30.7 | 28.3 | 1.82 | 3.86 | 27.8 | 26.6 | -82.8 | -3.84 | - | - | - | 4.4e-08 |
+| B | 24.2 | 2.45 | 1.14 | 2.83 | 31.8 | 30.7 | 28.3 | 1.82 | 3.86 | 27.7 | 26.5 | -82.9 | -3.86 | - | - | - | 4.4e-08 |
+| C | 23.9 | 2.6 | 1.17 | 2.9 | 32.4 | 31.5 | 28 | 1.85 | 3.94 | 28.2 | 27.2 | -81.3 | -2.44 | - | - | - | 1.37e-08 |
+| D | 3.27 | 2.6 | 1.16 | 2.92 | 32.1 | 31.4 | 7.3 | 1.82 | 3.89 | 27.7 | 26.9 | -82.9 | -0.822 | - | - | - | 2.1e-09 |
+| E | 24.2 | 2.45 | 1.14 | 2.84 | 31.9 | 30.7 | 28.3 | 1.82 | 3.86 | 27.8 | 26.6 | -82.7 | -3.83 | - | - | - | 4.4e-08 |
+| F | 24.2 | 2.45 | 1.15 | 2.84 | 31.9 | 30.8 | 28.3 | 1.82 | 3.87 | 27.8 | 26.6 | -82.6 | -3.8 | - | - | - | 4.4e-08 |
+| G | 24.2 | 2.45 | 1.14 | 2.83 | 31.9 | 30.7 | 28.3 | 1.82 | 3.86 | 27.8 | 26.6 | -82.8 | -3.83 | - | - | - | 4.4e-08 |
+| H | 23.9 | 2.6 | 1.17 | 2.9 | 32.4 | 31.5 | 28 | 1.85 | 3.94 | 28.2 | 27.2 | -81.3 | -2.44 | - | - | - | 1.38e-08 |
+| I | 23.9 | 2.6 | 1.17 | 2.9 | 32.4 | 31.5 | 28 | 1.85 | 3.94 | 28.2 | 27.2 | -81.3 | -2.44 | - | - | - | 1.37e-08 |
+| KF-A | 61.6 | 2.45 | 0.00419 | 0.0313 | -0.379 | 0.561 | 61.2 | 0.0218 | 0.0804 | 3.55e-13 | 0.86 | -176 | 14.6 | 24 | 981 | 29.1 | 8.86e-06 |
+| KF-B | 62.2 | 2.75 | 0.00677 | 0.0891 | -0.557 | 2.3 | 61.6 | 0.0317 | 0.156 | 8.53e-13 | 2.57 | -176 | 17.5 | 27.2 | 1.15e+03 | 26.9 | 2e-08 |
+| KF-C | 61.6 | 2.46 | 0.00421 | 0.0315 | -0.381 | 0.566 | 61.3 | 0.0219 | 0.0809 | 3.69e-13 | 0.865 | -176 | 14.6 | 24 | 984 | 29.1 | 8.06e-06 |
+| KF-D | 61.6 | 2.45 | 0.00419 | 0.0314 | -0.38 | 0.563 | 61.2 | 0.0218 | 0.0806 | 3.41e-13 | 0.861 | -176 | 14.6 | 24.1 | 978 | 29.2 | 8.85e-06 |
+
+
+Reference at 298.15 K: dS = -175.9 J/mol/K; dCp = d(dH)/dT ~ +8 J/mol/K (298-450 K).
+
+
+## 1c. ln K anchored separately at every temperature
+
+eps_b (kJ/mol) solving ln K_p(T) exactly at each temperature (k_b = 580; KF families keep w of the 298 K anchor). A temperature-independent potential that describes the reaction needs one eps_b for all T. 'worst transfer': rms ln K error over all nine temperatures of the potential anchored at the worst single temperature. '-': no eps_b reaches ln K at that T (family D: its Tang-Toennies attraction alone binds too strongly above 350 K).
+
+| family | 298.15 K | 325 K | 350 K | 375 K | 400 K | 425 K | 450 K | 475 K | 500 K | span | rms dH err (kJ/mol) | worst transfer rms lnK |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A | 28.3 | 25.79 | 23.47 | 21.15 | 18.84 | 16.52 | 14.19 | 11.81 | 9.358 | 18.9 | 36.8 | 3.98 |
+| B | 28.33 | 25.82 | 23.49 | 21.18 | 18.87 | 16.55 | 14.22 | 11.84 | 9.391 | 18.9 | 36.7 | 3.97 |
+| C | 28.05 | 25.49 | 23.11 | 20.73 | 18.32 | 15.88 | 13.36 | 10.68 | 7.718 | 20.3 | 38 | 4.17 |
+| D | 7.299 | 4.817 | 2.447 | - | - | - | - | - | - | 4.85 | 30.3 | 2.93 |
+| E | 28.29 | 25.77 | 23.44 | 21.12 | 18.79 | 16.47 | 14.12 | 11.72 | 9.243 | 19 | 36.8 | 3.99 |
+| F | 28.26 | 25.74 | 23.41 | 21.09 | 18.77 | 16.45 | 14.11 | 11.73 | 9.275 | 19 | 36.9 | 3.98 |
+| G | 28.3 | 25.79 | 23.46 | 21.15 | 18.83 | 16.52 | 14.18 | 11.8 | 9.346 | 19 | 36.8 | 3.98 |
+| H | 28.05 | 25.49 | 23.11 | 20.73 | 18.32 | 15.88 | 13.36 | 10.68 | 7.718 | 20.3 | 38 | 4.17 |
+| I | 28.05 | 25.49 | 23.11 | 20.73 | 18.32 | 15.88 | 13.36 | 10.68 | 7.718 | 20.3 | 38 | 4.17 |
+| KF-A | 61.25 | 61.24 | 61.21 | 61.16 | 61.1 | 61.03 | 60.94 | 60.84 | 60.74 | 0.512 | 1.12 | 0.113 |
+| KF-B | 61.61 | 61.59 | 61.55 | 61.48 | 61.38 | 61.24 | 61.06 | 60.79 | 60.38 | 1.23 | 3.33 | 0.277 |
+| KF-C | 61.25 | 61.24 | 61.21 | 61.16 | 61.1 | 61.03 | 60.94 | 60.85 | 60.74 | 0.516 | 1.13 | 0.113 |
+| KF-D | 61.25 | 61.24 | 61.2 | 61.16 | 61.1 | 61.02 | 60.94 | 60.84 | 60.73 | 0.513 | 1.12 | 0.113 |
+
+
+
+## 1d. Intrinsic valence of the Kern-Frenkel families (real track, 298.15 K, 1 bar)
+
+No many-body term: one patch per bead. dE relative to the aligned dimer + free monomer; trimer fraction is a rigorous upper bound. 'isotropic same curve': the aligned radial curve without orientation dependence.
+
+| family | penalty | w (deg) | worst 2nd bond dE (kJ/mol) | relaxed trimer dE | relaxed vs vdW | trimer fraction <= | isotropic same curve |
+|---|---|---|---|---|---|---|---|
+| KF-A | none (patch only) | 24 | 16.5 | 16.5 | 20.5 | 3.37e-07 | 1 |
+| KF-A | coord_hermite_cubic | 24 | 16.8 | 16.8 | 20.7 | 6.43e-08 | 1 |
+| KF-B | none (patch only) | 27.2 | 2.13 | 2.13 | 5.8 | 0.000165 | 1 |
+| KF-B | coord_hermite_cubic | 27.2 | 3.1e+03 | 4.45 | 8.12 | 1.09e-05 | 1 |
+| KF-C | none (patch only) | 24 | 15.3 | 15.3 | 21.2 | 4.82e-07 | 1 |
+| KF-C | coord_hermite_cubic | 24 | 15.6 | 15.6 | 21.4 | 9.89e-08 | 1 |
+| KF-D | none (patch only) | 24.1 | 16.5 | 16.5 | 20.5 | 3.39e-07 | 1 |
+| KF-D | coord_hermite_cubic | 24.1 | 16.8 | 16.8 | 20.7 | 6.45e-08 | 1 |
 
 
 
@@ -21,14 +91,14 @@ Hard criteria: every two-bond geometry lies above the dimer-monomer van der Waal
 
 | penalty | hard pass | exact pair | d lnK (pair) | worst trimer dE (vs free) | worst trimer dE (vs vdW) | longest trap (ps) | trimer fraction | lambda/eps_b | eam/fs | params |
 |---|---|---|---|---|---|---|---|---|---|---|
-| coord_quintic_cubic | yes | yes | 0 | -0.403 | 3.55 | 0.682 | 6.76e-05 | 1.13 | yes | 5 |
-| coord_hermite_cubic | yes | yes | 0 | -0.322 | 3.63 | 0.39 | 0.000103 | 1.11 | yes | 4 |
-| kts | yes | yes | 0 | -0.804 | 3.15 | 0.971 | 2.76e-05 | 38.9 | no | 5 |
-| coord_tanh_damped_cubic | yes | yes | 0 | -0.216 | 3.74 | 1.16e+04 | 9.8e-06 | 1.07 | yes | 6 |
-| glue | yes | yes | 0 | -2.18 | 1.77 | 1.05 | 8.03e-05 | 1.2 | yes | 4 |
-| sw | yes | yes | 0 | 2.01 | 5.97 | 15.9 | 6.43e-06 | 64.4 | no | 4 |
-| coord_gauss_tanh_sq | yes | no | -0.0014 | -0.223 | 3.73 | 0.668 | 6.8e-05 | 1.02 | yes | 4 |
-| coord_hermite_tanh_sq | yes | no | -0.00201 | -0.295 | 3.66 | 0.393 | 9.52e-05 | 1.06 | yes | 4 |
+| coord_quintic_cubic | yes | yes | 0 | -0.52 | 3.43 | 0.889 | 5.56e-05 | 1.15 | yes | 5 |
+| coord_hermite_cubic | yes | yes | 0 | -0.62 | 3.33 | 0.458 | 0.00011 | 1.16 | yes | 4 |
+| kts | yes | yes | 0 | -1.1 | 2.86 | 0.787 | 2.45e-05 | 72.2 | no | 5 |
+| coord_tanh_damped_cubic | yes | yes | 0 | -0.177 | 3.77 | 7.15e+03 | 1.04e-05 | 1.07 | yes | 6 |
+| glue | yes | yes | 0 | -2.05 | 1.9 | 4.03 | 5.45e-05 | 1.2 | yes | 4 |
+| sw | yes | yes | 0 | 1.02 | 4.97 | 10.4 | 4.4e-06 | 125 | no | 4 |
+| coord_hermite_tanh_sq | yes | no | -0.00258 | -0.551 | 3.4 | 0.465 | 0.000101 | 1.1 | yes | 4 |
+| coord_gauss_tanh_sq | yes | no | -0.00132 | -0.177 | 3.77 | 2.43 | 3.37e-05 | 1.02 | yes | 4 |
 
 
 
@@ -38,14 +108,14 @@ Hard criteria: every two-bond geometry lies above the dimer-monomer van der Waal
 
 | penalty | hard pass | exact pair | d lnK (pair) | worst trimer dE (vs free) | worst trimer dE (vs vdW) | longest trap (ps) | trimer fraction | lambda/eps_b | eam/fs | params |
 |---|---|---|---|---|---|---|---|---|---|---|
-| coord_tanh_damped_cubic | yes | yes | 0 | -2.79 | 1.17 | 68.3 | 0.0046 | 0.823 | yes | 6 |
-| glue | yes | yes | 0 | -1.88 | 2.07 | 2.23 | 0.0072 | 1.2 | yes | 4 |
-| coord_quintic_cubic | yes | yes | 0 | -2.82 | 1.13 | 3.26 | 0.0109 | 0.892 | yes | 5 |
-| coord_hermite_cubic | yes | yes | 0 | -2.82 | 1.14 | 3.05 | 0.0125 | 0.877 | yes | 4 |
-| sw | yes | yes | 0 | -1.64 | 2.32 | 100 | 0.00101 | 54.9 | no | 4 |
-| kts | yes | yes | 0 | -2.89 | 1.07 | 3.3 | 0.00609 | 30.7 | no | 5 |
-| coord_gauss_tanh_sq | yes | no | -0.000703 | -2.79 | 1.16 | 3.44 | 0.0117 | 0.792 | yes | 4 |
-| coord_hermite_tanh_sq | yes | no | -0.000724 | -2.82 | 1.14 | 3.1 | 0.0122 | 0.833 | yes | 4 |
+| coord_tanh_damped_cubic | yes | yes | 0 | -2.73 | 1.23 | 53.6 | 0.00434 | 0.851 | yes | 6 |
+| glue | yes | yes | 0 | -1.78 | 2.17 | 1.71 | 0.00525 | 1.2 | yes | 4 |
+| coord_quintic_cubic | yes | yes | 0 | -2.77 | 1.18 | 3.43 | 0.00882 | 0.929 | yes | 5 |
+| coord_hermite_cubic | yes | yes | 0 | -2.77 | 1.18 | 3.11 | 0.0108 | 0.937 | yes | 4 |
+| sw | yes | yes | 0 | -1.75 | 2.21 | 94.5 | 0.000711 | 102 | no | 4 |
+| kts | yes | yes | 0 | -2.9 | 1.06 | 3.32 | 0.00493 | 56.4 | no | 5 |
+| coord_gauss_tanh_sq | yes | no | -0.000717 | -2.73 | 1.23 | 4.64 | 0.00803 | 0.819 | yes | 4 |
+| coord_hermite_tanh_sq | yes | no | -0.000841 | -2.77 | 1.18 | 3.12 | 0.0105 | 0.889 | yes | 4 |
 
 
 

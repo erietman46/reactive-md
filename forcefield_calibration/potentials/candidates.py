@@ -11,6 +11,10 @@ from the functional form, not from the starting point:
   parameter - real NO2 association is essentially barrierless);
 * all Mie/Morse/Gaussian/TT tails are switched to zero between 8 and 10 A
   (the same MD cut-off treatment for every family).
+
+Families A-I are isotropic (U = U(r)); KF-A ... KF-D are the smooth
+Kern-Frenkel versions U(r, Omega_i, Omega_j) of four radial constructions
+(``potentials/kern_frenkel.py``), started from a patch width of 0.5 rad.
 """
 from __future__ import annotations
 
@@ -18,6 +22,7 @@ import numpy as np
 
 from ..constants import R_KJ
 from .additive import AdditivePotential
+from .kern_frenkel import KernFrenkelPotential
 from .piecewise import PiecewisePotential
 
 RB = 1.78
@@ -41,8 +46,26 @@ def _ad(name, **kw):
     return AdditivePotential(name=name, **base).with_bond(kb=KB0)
 
 
+def _kf(name, radial, w=0.5):
+    q = {k: v for k, v in radial.p.items()}
+    return KernFrenkelPotential(name=name, radial_class=type(radial).__name__, w=w, **q)
+
+
 def candidate_families():
     """Initial (unfitted) potentials, keyed by candidate label."""
+    iso = isotropic_families()
+    out = dict(iso)
+    out.update({
+        "KF-A": _kf("KF-A: smooth Kern-Frenkel | Morse | quintic Hermite barrier | LJ 12-6", iso["A"]),
+        "KF-B": _kf("KF-B: smooth Kern-Frenkel | Morse | Gaussian barrier | LJ 12-6", iso["I"]),
+        "KF-C": _kf("KF-C: smooth Kern-Frenkel | Morse | quintic Hermite barrier | Wang-Frenkel", iso["G"]),
+        "KF-D": _kf("KF-D: smooth Kern-Frenkel | Mie | quintic Hermite barrier | LJ 12-6", iso["B"]),
+    })
+    return out
+
+
+def isotropic_families():
+    """Isotropic radial families A-I."""
     return {
         "A": _pw("A: piecewise Morse | quintic barrier | Mie 12-6", formB="morse", formF="mie"),
         "B": _pw("B: piecewise Mie(2m-m) | quintic barrier | Mie 12-6", formB="mie", formF="mie"),
@@ -54,6 +77,10 @@ def candidate_families():
                  formB="wf", formF="wf", xf=2.5),
         "F": _pw("F: piecewise KTS | quintic barrier | Mie 12-6 (supplementary)",
                  formB="kts", formF="mie", rcb=3.2),
+        "G": _pw("G: piecewise Morse | quintic barrier | Wang-Frenkel", formB="morse", formF="wf", xf=2.5),
+        "H": _ad("H: additive Morse + Gaussian barrier + KTS", formF="kts", ef=EF0, rf=RF0, pkf=4.0, g2f=20.0,
+                 rcf=8.0),
+        "I": _ad("I: additive Morse + Gaussian barrier + LJ 12-6", formF="mie", ef=EF0, rf=RF0, nf=12.0, mf=6.0),
     }
 
 
@@ -69,16 +96,42 @@ FLUID_PARAMS = {
     "D": [("C6", 5e3, 8e4), ("bt", 0.5, 3.0)],
     "E": [("ef", 0.5, 6.0), ("xf", 1.3, 3.0)],
     "F": [("ef", 0.5, 6.0)],
+    "G": [("ef", 0.5, 6.0), ("xf", 1.3, 3.0)],
+    "H": [("ef", 0.5, 6.0), ("g2f", 2.0, 40.0)],
+    "I": [("ef", 0.5, 6.0)],
+    "KF-A": [("ef", 0.5, 6.0)],
+    "KF-B": [("ef", 0.5, 6.0)],
+    "KF-C": [("ef", 0.5, 6.0), ("xf", 1.3, 3.0)],
+    "KF-D": [("ef", 0.5, 6.0)],
 }
 
-BARRIER_KEY = {"A": "Eh", "B": "Eh", "C": "H", "D": "H", "E": "Eh", "F": "Eh"}
+BARRIER_KEY = {"A": "Eh", "B": "Eh", "C": "H", "D": "H", "E": "Eh", "F": "Eh", "G": "Eh", "H": "H", "I": "H",
+               "KF-A": "Eh", "KF-B": "H", "KF-C": "Eh", "KF-D": "Eh"}
+BARRIER_POSITION = {"Eh": "rh", "H": "rx"}
+# The bond length r_b is well defined (N-N in N2O4); the barrier position is a design choice, so the
+# bond-well fits may move it by up to RH_DEV around its starting value (2.6 A).  For the additive
+# construction only outwards: a Gaussian barrier moved inwards is swallowed by the Morse well (at
+# r_x = 2.45 A the barrier disappears for eps_b > ~28 kJ/mol), which breaks the anchoring.
+RH_DEV = 0.15
+BARRIER_POSITION_RANGE = {"rh": (-RH_DEV, RH_DEV), "rx": (0.0, RH_DEV)}
+# patch width of the Kern-Frenkel families (rad): bounds of the fits
+W_BOUNDS = (0.05, 1.5)
 
-PRIMARY = ("A", "B", "C", "D")
-SUPPLEMENTARY = ("E", "F")
+ISOTROPIC = ("A", "B", "C", "D", "E", "F", "G", "H", "I")
+KERN_FRENKEL = ("KF-A", "KF-B", "KF-C", "KF-D")
+ALL_LABELS = ISOTROPIC + KERN_FRENKEL
+PRIMARY = ("A", "B", "C", "D", "KF-A")
+SUPPLEMENTARY = ("E", "F", "G", "H", "I", "KF-B", "KF-C", "KF-D")
+# radial construction under each Kern-Frenkel family (same colour in the figures)
+KF_PARENT = {"KF-A": "A", "KF-B": "I", "KF-C": "G", "KF-D": "B"}
 
 
 def label_of(pot):
     return pot.name.split(":")[0]
+
+
+def is_kf(label):
+    return label in KERN_FRENKEL
 
 
 def finite(x):

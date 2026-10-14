@@ -8,7 +8,7 @@
     "class_name": "AdditivePotential",
     "params": {
       "formB": "morse",
-      "eb": 28.04641181714564,
+      "eb": 28.046411817145643,
       "rb": 1.78,
       "xb": 2.0,
       "n": 12.0,
@@ -20,12 +20,19 @@
       "rbon": 2.3,
       "rboff": 3.2,
       "H": 5.0,
-      "rx": 2.6,
+      "rx": 2.6000000000000005,
       "sx": 0.25,
       "formF": "gauss",
       "ef": 3.204389181780652,
       "rf": 4.183416054049033,
       "sf": 0.6198585528985802,
+      "nf": 12.0,
+      "mf": 6.0,
+      "xf": 2.0,
+      "bf": 1.5,
+      "pkf": 4.0,
+      "g2f": 3.0,
+      "rcf": 8.0,
       "C6": 6000.0,
       "bt": 1.5,
       "C8": 54000.0,
@@ -42,12 +49,12 @@
       "family": "additive",
       "clean": true,
       "r_bond": 1.7799952106030408,
-      "u_bond": -28.046306441214295,
+      "u_bond": -28.0463064412143,
       "r_barrier": 2.6826909777252634,
-      "u_barrier": 2.5622977449437068,
+      "u_barrier": 2.562297744943712,
       "r_disp": 4.183416054049033,
       "u_disp": -3.204389181780652,
-      "k_bond": 580.0964568845948,
+      "k_bond": 580.0964568845947,
       "rcut": 10.0
     },
     "units": {
@@ -57,8 +64,8 @@
   },
   "manybody": {
     "kind": "coord_hermite_cubic",
-    "lam_kJmol": 52.839175165665665,
-    "lam_min_kJmol": 26.419587582832833,
+    "lam_kJmol": 52.839175165665694,
+    "lam_min_kJmol": 26.419587582832847,
     "lam_factor": 2.0,
     "strength_reference": "dimer + monomer van der Waals complex",
     "hinge": "cubic",
@@ -86,22 +93,22 @@
   "verification": [
     {
       "config": 0,
-      "python_pair": -28.046306441214295,
-      "python_total": -28.046306441214295,
+      "python_pair": -28.0463064412143,
+      "python_total": -28.0463064412143,
       "lammps_table": -28.046306860184124,
       "lammps_eam": -28.046306441216647
     },
     {
       "config": 1,
-      "python_pair": -57.26096325321949,
-      "python_total": -8.016873342984091,
+      "python_pair": -57.260963253219494,
+      "python_total": -8.01687334298407,
       "lammps_table": -57.26096392050277,
       "lammps_eam": -8.016873344543466
     },
     {
       "config": 2,
-      "python_pair": -84.13891843393496,
-      "python_total": 63.72330879603406,
+      "python_pair": -84.13891843393498,
+      "python_total": 63.72330879603413,
       "lammps_table": -84.13891972286532,
       "lammps_eam": 63.723308795190526
     }

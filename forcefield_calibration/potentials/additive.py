@@ -6,7 +6,15 @@
   switched off by the quintic switch ``C_b`` between ``rbon`` and ``rboff``.
 * barrier: Gaussian of height ``H`` at ``rx`` with width ``sx``.
 * ``U_disp``: ``gauss`` (-eps_f Gaussian at r_f, width s_f), ``tt``
-  (Tang-Toennies-damped -C6/r^6) or ``bj`` (Becke-Johnson-damped C6/C8).
+  (Tang-Toennies-damped -C6/r^6), ``bj`` (Becke-Johnson-damped C6/C8), or
+  one of the non-bonded branches of the piecewise construction (``mie`` -
+  Lennard-Jones 12-6 by default -, ``wf``, ``kts``, ``morse``) with minimum
+  -eps_f at r_f.  Those branches are used unchanged for r >= r_f; inside the
+  minimum they are continued by the half-Gaussian -eps_f exp(-((r_f - r)/l)^2)
+  with l = sqrt(2 eps_f / k_f), which matches value, slope and curvature k_f
+  at r_f (C2) and vanishes in the bonded region.  This is the smooth analogue
+  of the Weeks-Chandler-Andersen attractive part: the repulsive LJ core, which
+  would bury the bond well (U_LJ(1.78 A) ~ 1e5 kJ/mol), is not added.
 * ``C``: overall quintic switch between ``rin`` and ``rout`` (finite cut-off).
 
 The input parameters are *nominal*: because the terms are added, the actual
@@ -27,7 +35,7 @@ class AdditivePotential(PairPotential):
         formB="morse", eb=60.0, rb=1.78, xb=2.0, n=12.0, m=6.0, pk=4.0, g2=3.902767, rcb=3.2, bb=2.5,
         rbon=2.3, rboff=3.2,
         H=10.0, rx=2.6, sx=0.3,
-        formF="gauss", ef=1.8, rf=3.8, sf=0.7,
+        formF="gauss", ef=1.8, rf=3.8, sf=0.7, nf=12.0, mf=6.0, xf=2.0, bf=1.5, pkf=4.0, g2f=3.0, rcf=8.0,
         C6=6000.0, bt=1.5, C8=54000.0, a1=0.4289, a2=2.35, s6=1.0, s8=0.7875,
         rin=7.0, rout=9.0,
     )
@@ -43,7 +51,10 @@ class AdditivePotential(PairPotential):
 
     def breakpoints(self):
         p = self.p
-        return [p["rbon"], p["rboff"], p["rin"]]
+        out = [p["rbon"], p["rboff"], p["rin"]]
+        if p["formF"] in B.FLUID_FORMS:
+            out.append(p["rf"])
+        return out
 
     def nominal_bond_radius(self):
         return self.p["rb"]
@@ -78,7 +89,24 @@ class AdditivePotential(PairPotential):
         if f == "gauss":
             g, dg = B.gauss(r, p["rf"], p["sf"])
             return -p["ef"] * g, -p["ef"] * dg
+        if f in B.FLUID_FORMS:
+            return self._outer_branch(r)
         raise ValueError(f"unknown dispersion form {f!r}")
+
+    def _outer_branch(self, r):
+        """Non-bonded branch for r >= r_f, C2 half-Gaussian continuation inside r_f."""
+        p = self.p
+        rf, ef = p["rf"], p["ef"]
+        ell = np.sqrt(2.0 * ef / B.fluid_k(p))
+        u = np.empty_like(r)
+        du = np.empty_like(r)
+        out = r >= rf
+        if out.any():
+            u[out], du[out] = B.fluid_branch(r[out], p)
+        x = rf - r[~out]
+        g = -ef * np.exp(-(x / ell) ** 2)
+        u[~out], du[~out] = g, g * 2.0 * x / ell ** 2
+        return u, du
 
     def _ud(self, r):
         p = self.p

@@ -7,6 +7,12 @@ For the two short-listed pair families (A, C) and the selected penalty (coord_he
 
 Every eam/fs file is checked against the Python energies with the LAMMPS
 Python module (if installed); the comparison is stored in params.json.
+
+The Kern-Frenkel models (export_lammps/real_KF-<X>_anchored/) have no native
+LAMMPS pair style.  They are exported as two radial tables, ALIGNED (U_on) and
+MISALIGNED (U_off), plus the angular parameters: U = S U_on + (1 - S) U_off
+with S = f(n_i . r_hat) f(-n_j . r_hat), f(c) = exp(-(1 - c)/w^2), which is
+what a custom pair style (or a plugin) has to evaluate.
 """
 from common import ROOT, load_json, potential_record, rebuild
 
@@ -56,7 +62,50 @@ def export_one(pot, folder: Path, meta):
     return rec
 
 
+class _Curve:
+    """Minimal scalar potential (U, dU, r_bond, rcut, name, p) for the table writer."""
+
+    def __init__(self, base, u, du, name):
+        self.U, self.dU, self.name, self.p = u, du, name, base.p
+        self.r_bond, self.rcut = base.r_bond, base.rcut
+
+
+def export_kf(label, folder: Path):
+    from forcefield_calibration.reference_data import no2_libration_inertia
+
+    folder.mkdir(parents=True, exist_ok=True)
+    s1 = load_json(f"stage1_{label}.json")
+    pot = rebuild(s1["variants"]["anchored"]["potential"])
+    on = _Curve(pot, pot.U, pot.dU, pot.name + " [aligned]")
+    off = _Curve(pot, pot.U_off, pot.dU_off, pot.name + " [misaligned]")
+    c_on = write_pair_table(on, folder / "kf_radial.table", keyword="ALIGNED", units="real")
+    path_off = folder / "kf_radial_off.table"
+    c_off = write_pair_table(off, path_off, keyword="MISALIGNED", units="real")
+    # one file with both sections
+    (folder / "kf_radial.table").write_text((folder / "kf_radial.table").read_text() + "\n"
+                                            + path_off.read_text().split("\n", 2)[2])
+    path_off.unlink()
+    rec = dict(track="real", model="smooth Kern-Frenkel", T_K=298.15,
+               calibration="K_p(298.15 K) and dH(298.15 K) exact, k_b = 580 kJ/mol/A^2, patch width fitted",
+               pair=potential_record(pot), angular=s1["variants"]["anchored"]["angular"],
+               energy="U = S U_on(r) + (1 - S) U_off(r), S = f(n_i.r_hat) f(-n_j.r_hat), f(c) = exp(-(1 - c)/w^2)",
+               tables=dict(file="kf_radial.table", sections=["ALIGNED", "MISALIGNED"], units="real",
+                           aligned=c_on.replace("kf_radial.table", "kf_radial.table"), misaligned=c_off.replace(
+                               "kf_radial_off.table", "kf_radial.table")),
+               rotational=dict(patch_axis="C2 axis of NO2", inertia_amuA2_IA_IC=no2_libration_inertia()),
+               lammps="no native pair style: needs a custom anisotropic pair style (e.g. a plugin) evaluating the "
+                      "expression above; the coordination penalty is not needed (see results/stage2_kf.json)")
+    (folder / "params.json").write_text(json.dumps(rec, indent=2, default=float))
+    return rec
+
+
 def main():
+    for lab in ("KF-A", "KF-B"):
+        try:
+            export_kf(lab, OUT / f"real_{lab}_anchored")
+            print(f"Kern-Frenkel {lab}: tables + params written")
+        except FileNotFoundError:
+            pass
     g = load_json("generic_design.json")
     for fam in ("A", "C"):
         s1 = load_json(f"stage1_{fam}.json")

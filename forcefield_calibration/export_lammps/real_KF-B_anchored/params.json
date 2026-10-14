@@ -1,0 +1,110 @@
+{
+  "track": "real",
+  "model": "smooth Kern-Frenkel",
+  "T_K": 298.15,
+  "calibration": "K_p(298.15 K) and dH(298.15 K) exact, k_b = 580 kJ/mol/A^2, patch width fitted",
+  "pair": {
+    "name": "KF-B: smooth Kern-Frenkel | Morse | Gaussian barrier | LJ 12-6",
+    "family": "kern_frenkel",
+    "class_name": "KernFrenkelPotential",
+    "params": {
+      "formB": "morse",
+      "eb": 61.60851317859263,
+      "rb": 1.78,
+      "xb": 2.0,
+      "n": 12.0,
+      "m": 6.0,
+      "pk": 4.0,
+      "g2": 3.902767,
+      "rcb": 3.2,
+      "bb": 2.1695948184707676,
+      "rbon": 2.3,
+      "rboff": 3.2,
+      "H": 5.0,
+      "rx": 2.7499999999999996,
+      "sx": 0.25,
+      "formF": "mie",
+      "ef": 1.8374990251818917,
+      "rf": 4.183416054049033,
+      "sf": 0.7,
+      "nf": 12.0,
+      "mf": 6.0,
+      "xf": 2.0,
+      "bf": 1.5,
+      "pkf": 4.0,
+      "g2f": 3.0,
+      "rcf": 8.0,
+      "C6": 6000.0,
+      "bt": 1.5,
+      "C8": 54000.0,
+      "a1": 0.4289,
+      "a2": 2.35,
+      "s6": 1.0,
+      "s8": 0.7875,
+      "rin": 8.0,
+      "rout": 10.0,
+      "radial_class": "AdditivePotential",
+      "w": 0.473872613959228,
+      "cW": 2.0,
+      "ds": 0.5
+    },
+    "kh": null,
+    "landscape": {
+      "name": "KF-B: smooth Kern-Frenkel | Morse | Gaussian barrier | LJ 12-6",
+      "family": "kern_frenkel",
+      "clean": true,
+      "r_bond": 1.780000139003456,
+      "u_bond": -61.60852443101637,
+      "r_barrier": 2.9308184071530645,
+      "u_barrier": 1.3155669398623258,
+      "r_disp": 4.183416054049193,
+      "u_disp": -1.837499025181865,
+      "k_bond": 579.9996353535123,
+      "rcut": 10.0,
+      "w": 0.473872613959228,
+      "w_deg": 27.1509008066959,
+      "cW": 2.0,
+      "r_s": 3.2499999999999996,
+      "W_b": 258.9500867148452,
+      "kappa": 1153.1686825478837,
+      "misaligned_monotonic": true
+    },
+    "units": {
+      "energy": "kJ/mol",
+      "distance": "Angstrom"
+    }
+  },
+  "angular": {
+    "w": 0.473872613959228,
+    "w_deg": 27.1509008066959,
+    "kappa": 1153.1686825478837,
+    "W_b": 258.9500867148452,
+    "r_s": 3.2499999999999996,
+    "wall_A": 81.5199785157688,
+    "libration_wavenumber_IA": 1242.010209386206,
+    "libration_period_fs_IA": 26.856791729835894,
+    "libration_wavenumber_IC": 281.28804762094603,
+    "libration_period_fs_IC": 118.58452501602606,
+    "equivalent_hard_cone_deg_298": 3.7852119798131643,
+    "libration_md_ok": true
+  },
+  "energy": "U = S U_on(r) + (1 - S) U_off(r), S = f(n_i.r_hat) f(-n_j.r_hat), f(c) = exp(-(1 - c)/w^2)",
+  "tables": {
+    "file": "kf_radial.table",
+    "sections": [
+      "ALIGNED",
+      "MISALIGNED"
+    ],
+    "units": "real",
+    "aligned": "pair_coeff 1 1 kf_radial.table ALIGNED 10",
+    "misaligned": "pair_coeff 1 1 kf_radial.table MISALIGNED 10"
+  },
+  "rotational": {
+    "patch_axis": "C2 axis of NO2",
+    "inertia_amuA2_IA_IC": [
+      2.1068875918612204,
+      41.0760940545809
+    ]
+  },
+  "lammps": "no native pair style: needs a custom anisotropic pair style (e.g. a plugin) evaluating the expression above; the coordination penalty is not needed (see results/stage2_kf.json)"
+}

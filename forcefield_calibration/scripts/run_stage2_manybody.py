@@ -19,17 +19,26 @@ For every penalty form:
     density, compared with the pair-only model; Delta B3
   * LAMMPS check of the eam/fs export (coordination and glue forms)
 
-Outputs results/stage2_<track>.json, results/stage2_summary.csv.
+A separate track checks the intrinsic valence of the smooth Kern-Frenkel
+families (anchored at 298.15 K, 1 bar): one patch per bead, no penalty, then
+the selected penalty on top (manybody/patchy_valence.py).
+
+Outputs results/stage2_<track>.json, results/stage2_kf.json, results/stage2_summary.csv.
 """
 from common import MU, T_GEN, T_REF, load_json, rebuild, save_csv, save_json
+
+import sys
 
 import numpy as np
 
 from forcefield_calibration.export.lammps_export import verify_exports
 from forcefield_calibration.manybody.coordination_penalties import make_penalty
+from forcefield_calibration.manybody.patchy_valence import (pair_bound_log_KV, relaxed_trimer, second_bond_map,
+                                                            trimer_equilibrium_kf)
 from forcefield_calibration.manybody.third_virial import delta_B3, trimer_equilibrium
 from forcefield_calibration.manybody.trimer_energy_surface import (required_strength, trap_check, vdw_reference,
                                                                    worst_trimer)
+from forcefield_calibration.potentials.candidates import KERN_FRENKEL
 from forcefield_calibration.thermodynamics.equilibrium_integrals import bound_state, number_density_ideal
 
 PENALTIES = [
@@ -123,6 +132,46 @@ def lambda_scan(pot, T, rho, kind):
     return out
 
 
+def kf_valence(rho, T=T_REF, factor=2.0):
+    """Intrinsic valence of every Kern-Frenkel family (anchored), without and with the selected penalty."""
+    rows = []
+    for lab in KERN_FRENKEL:
+        try:
+            pot = rebuild(load_json(f"stage1_{lab}.json")["variants"]["anchored"]["potential"])
+        except FileNotFoundError:
+            continue
+        E_vdw, vdw_geom = vdw_reference(pot)
+        iso0 = trimer_equilibrium(pot.radial, T).fractions(rho)  # same aligned curve, isotropic
+        b = np.linspace(0.8 * pot.r_bond, pot.r_barrier, 120)
+        th = np.deg2rad(np.linspace(20, 180, 81))
+        Bm, Th = np.meshgrid(b, th, indexing="ij")
+        for pen in (None, "coord_hermite_cubic"):
+            mb = None
+            if pen is not None:
+                mb = make_penalty(pot, pen)
+                mb = mb.with_strength(factor * required_strength(pot, mb).lam_min)
+            E = second_bond_map(pot, Bm, Th, mb=mb, n_phi=181)
+            i = np.unravel_index(np.argmin(E), E.shape)
+            rt = relaxed_trimer(pot, mb=mb, n_starts=40)
+            te = trimer_equilibrium_kf(pot, T, mb=mb)
+            fr = te.fractions(rho)
+            row = dict(family=lab, penalty=pen or "none (patch only)", lam=None if mb is None else mb.lam,
+                       w_deg=float(np.rad2deg(pot.p["w"])), E_vdw=E_vdw,
+                       worst_second_bond_dE=float(E[i]), worst_second_bond_at=(float(Bm[i]), float(np.rad2deg(Th[i]))),
+                       relaxed_trimer_dE=rt.dE, relaxed_trimer_vs_vdw=rt.dE - E_vdw, relaxed_trimer=rt.__dict__,
+                       log_K3_bound=te.log_K3, log_K2=te.log_K2,
+                       pair_bound_excess=pair_bound_log_KV(pot, T) - te.log_K2,
+                       trimer_fraction_bound=fr["trimer"], dimer_fraction=fr["dimer"],
+                       trimer_fraction_isotropic_same_curve=iso0["trimer"])
+            rows.append(row)
+            print(f"[stage2:kf] {lab} {row['penalty']}: worst 2nd bond {E[i]:.3g}, relaxed {rt.dE:.3g} kJ/mol, "
+                  f"trimer <= {fr['trimer']:.3g} (isotropic same curve {iso0['trimer']:.3g})", flush=True)
+    save_json(dict(T=T, rho0=rho, rows=rows,
+                   note="trimer fractions are rigorous upper bounds (patchy_valence.trimer_equilibrium_kf)"),
+              "stage2_kf.json")
+    return rows
+
+
 def main():
     real = rebuild(load_json("stage1_A.json")["variants"]["anchored"]["potential"])
     gen = rebuild(load_json("generic_design.json")["states"]["A"]["E2K2"]["potential"])
@@ -148,7 +197,13 @@ def main():
                      "worst_trap_barrier", "worst_trap_lifetime_ps", "trimer_fraction", "trimer_fraction_pair_only",
                      "dimer_fraction", "log_K3_suppression", "delta_B3", "eam_compatible",
                      "lammps_eam_max_abs_err", "lammps_table_max_abs_err", "description"])
+    kf_valence(number_density_ideal(1e5, T_REF))
 
 
 if __name__ == "__main__":
-    main()
+    if "--kf-only" in sys.argv:
+        from forcefield_calibration.thermodynamics.equilibrium_integrals import number_density_ideal as _nd
+
+        kf_valence(_nd(1e5, T_REF))
+    else:
+        main()

@@ -2,12 +2,36 @@
   "_comment": "Physical and numerical constraints for the single-site NO2 pair potential. Values marked 'approx' must be checked against primary literature before being quoted.",
   "mass_gmol": 46.0055,
   "reduced_mass_gmol": 23.00275,
-  "bond_length_NN_A": {"value": 1.78, "note": "N-N distance in N2O4 (approx. 1.78 A); default bead-bead bond length, as in the explorer"},
-  "bond_length_COM_A": {"value": 2.43, "note": "approx. distance between the NO2 centres of mass in planar N2O4 (N-N + 2 x 0.33 A); alternative bead definition"},
-  "NN_stretch_wavenumber_cm1": {"value": 266.0, "note": "approx. N-N stretching fundamental of N2O4; with mu = 23.0 g/mol it gives k_b ~ 580 kJ/mol/A^2"},
+  "bond_length_NN_A": {
+    "value": 1.78,
+    "note": "N-N distance in N2O4 (approx. 1.78 A); default bead-bead bond length, as in the explorer"
+  },
+  "bond_length_COM_A": {
+    "value": 2.43,
+    "note": "approx. distance between the NO2 centres of mass in planar N2O4 (N-N + 2 x 0.33 A); alternative bead definition"
+  },
+  "NN_stretch_wavenumber_cm1": {
+    "value": 266.0,
+    "note": "approx. N-N stretching fundamental of N2O4; with mu = 23.0 g/mol it gives k_b ~ 580 kJ/mol/A^2"
+  },
   "k_bond_physical_kJmolA2": 580.0,
-  "k_bond_physical_range_kJmolA2": [150.0, 3000.0],
+  "k_bond_physical_range_kJmolA2": [
+    150.0,
+    3000.0
+  ],
   "md_timestep_fs": 1.0,
   "md_min_steps_per_bond_period": 20,
-  "pair_cutoff_switch_A": [8.0, 10.0]
+  "pair_cutoff_switch_A": [
+    8.0,
+    10.0
+  ],
+  "NO2_rotational_constants_cm1": {
+    "value": [
+      8.0012,
+      0.4336,
+      0.4104
+    ],
+    "note": "approx. A, B, C of NO2 (NIST CCCBDB). The patch (C2 axis) librates about the a axis (in plane, perpendicular to C2; I_A = 16.858/A amu A^2) and the c axis (out of plane, I_C); used only for the Kern-Frenkel libration period"
+  },
+  "md_min_steps_per_libration_period": 20
 }

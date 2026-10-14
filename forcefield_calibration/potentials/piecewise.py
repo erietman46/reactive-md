@@ -41,7 +41,7 @@ class PiecewisePotential(PairPotential):
     defaults = dict(
         formB="morse", rb=1.7, eb=100.0, n=12.0, m=6.0, xb=2.0, pk=4.0, g2=3.902767, rcb=2.8, bb=2.5,
         rh=2.6, Eh=10.0, kh=None,
-        formF="wf", rf=3.5, ef=1.0, nf=12.0, mf=6.0, xf=2.0, bf=1.5,
+        formF="wf", rf=3.5, ef=1.0, nf=12.0, mf=6.0, xf=2.0, bf=1.5, pkf=4.0, g2f=3.0, rcf=8.0,
         rin=None, rout=None,
     )
 
@@ -97,10 +97,8 @@ class PiecewisePotential(PairPotential):
     @property
     def rcut(self):
         p = self.p
-        if p["formF"] == "wf":
-            rc = B.wf_par(p["rf"], p["ef"], p["xf"])["rc"]
-            return float(rc if p["rout"] is None else min(rc, p["rout"]))
-        return float(p["rout"]) if p["rout"] is not None else np.inf
+        rc = B.fluid_cutoff(p)
+        return float(rc if p["rout"] is None else min(rc, p["rout"]))
 
     def breakpoints(self):
         p = self.p
